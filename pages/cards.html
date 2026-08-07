@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البطاقات الرقمية - Tech Services</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-credit-card"></i>
+                <span>Tech Services</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../index.html#services">خدماتنا</a></li>
+                <li><a href="../index.html#contact">اتصل بنا</a></li>
+                <li><a href="../admin/index.html" class="btn-admin">لوحة التحكم</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="service-hero" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+        <div class="container">
+            <div class="hero-content">
+                <i class="fas fa-credit-card"></i>
+                <h1>البطاقات الرقمية</h1>
+                <p>بطاقات iTunes, Google Play, Amazon والمزيد - تسليم فوري</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Info -->
+    <section class="service-info">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>تسليم فوري</h3>
+                    <p>احصل على الكود مباشرة بعد الدفع</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>موثوقة 100%</h3>
+                    <p>بطاقات أصلية من مصادر رسمية</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>أسعار منافسة</h3>
+                    <p>أفضل الأسعار في السوق</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">اختر نوع البطاقة</h2>
+            
+            <!-- Apple iTunes -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fab fa-apple"></i> Apple iTunes & App Store
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>iTunes $15</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">170</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('iTunes', '$15', 170)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card featured">
+                        <div class="featured-badge">الأكثر مبيعاً</div>
+                        <div class="price-header">
+                            <h3>iTunes $25</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">280</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('iTunes', '$25', 280)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>iTunes $50</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">540</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('iTunes', '$50', 540)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Play -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fab fa-google-play"></i> Google Play Store
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Google Play $10</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">115</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Google Play', '$10', 115)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Google Play $25</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">270</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Google Play', '$25', 270)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Google Play $50</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">520</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Google Play', '$50', 520)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amazon -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fab fa-amazon"></i> Amazon Gift Cards
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Amazon $25</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">280</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Amazon', '$25', 280)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Amazon $50</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">540</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Amazon', '$50', 540)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Amazon $100</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">1050</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Amazon', '$100', 1050)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Netflix & Spotify -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fas fa-film"></i> Netflix & Spotify
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Netflix شهر</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">99</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Netflix', 'اشتراك شهري', 99)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Netflix 3 أشهر</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">270</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Netflix', 'اشتراك 3 أشهر', 270)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Spotify Premium</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">85</span>
+                                <small>/شهر</small>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Spotify', 'Premium شهري', 85)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="order-section" id="orderForm" style="display: none;">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2>اطلب البطاقة الرقمية</h2>
+                <form id="cardsForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>نوع البطاقة</label>
+                            <input type="text" id="cardType" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>القيمة</label>
+                            <input type="text" id="cardValue" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر</label>
+                        <input type="text" id="price" readonly>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="email" placeholder="سيتم إرسال الكود إلى هذا البريد" required>
+                        <small>⚠️ تأكد من صحة البريد - سيتم إرسال الكود إليه خلال دقائق</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ملاحظات إضافية</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-shopping-cart"></i>
+                            إتمام الشراء
+                        </button>
+                        <button type="button" class="btn-cancel" onclick="hideOrderForm()">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tech Services</h3>
+                    <p>أفضل البطاقات الرقمية بتسليم فوري</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="../index.html">الرئيسية</a></li>
+                        <li><a href="../index.html#services">خدماتنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <p><i class="fas fa-envelope"></i> info@techservices.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tech Services. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        let selectedCardType = '';
+        let selectedCardValue = '';
+        let selectedPrice = 0;
+
+        function selectCard(cardType, cardValue, price) {
+            selectedCardType = cardType;
+            selectedCardValue = cardValue;
+            selectedPrice = price;
+            document.getElementById('cardType').value = cardType;
+            document.getElementById('cardValue').value = cardValue;
+            document.getElementById('price').value = price + ' MAD';
+            document.getElementById('orderForm').style.display = 'block';
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideOrderForm() {
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('cardsForm').reset();
+        }
+
+        document.getElementById('cardsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                serviceType: 'digital-cards',
+                cardType: selectedCardType,
+                cardValue: selectedCardValue,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                notes: document.getElementById('notes').value,
+                price: selectedPrice
+            };
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('✅ تم طلبك بنجاح! سنرسل الكود خلال دقائق.');
+                    hideOrderForm();
+                } else {
+                    alert('❌ حدث خطأ. الرجاء المحاولة مرة أخرى.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('❌ حدث خطأ. الرجاء المحاولة مرة أخرى.');
+            }
+        });
+    </script>
+
+    <style>
+        .platform-section {
+            margin: 50px 0;
+        }
+
+        .platform-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .platform-title i {
+            font-size: 2.5rem;
+        }
+    </style>
+
+    <script src="../js/enhancements.js"></script>
+</body>
+</html>

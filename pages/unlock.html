@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمة فتح الأجهزة - Tech Services</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-unlock-alt"></i>
+                <span>Tech Services</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../index.html#services">خدماتنا</a></li>
+                <li><a href="../index.html#contact">اتصل بنا</a></li>
+                <li><a href="../admin/index.html" class="btn-admin">لوحة التحكم</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="service-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="hero-content">
+                <i class="fas fa-unlock-alt"></i>
+                <h1>خدمة فتح الأجهزة</h1>
+                <p>فتح جميع أنواع الأجهزة بأمان وسرعة - iPhone, Samsung, Huawei وغيرها</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Info -->
+    <section class="service-info">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>جميع العلامات التجارية</h3>
+                    <p>نفتح جميع أنواع الهواتف من Apple, Samsung, Huawei, Xiaomi وغيرها</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>آمن 100%</h3>
+                    <p>فتح رسمي بدون ضرر على الجهاز أو فقدان البيانات</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>سريع ومضمون</h3>
+                    <p>فتح فوري للأجهزة المدعومة، وخلال 24-72 ساعة للبقية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">الأسعار والباقات</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="price-header">
+                        <i class="fab fa-apple"></i>
+                        <h3>iPhone Unlock</h3>
+                    </div>
+                    <div class="price-body">
+                        <div class="price-amount">
+                            <span class="currency">MAD</span>
+                            <span class="amount">299</span>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check"></i> فتح شبكة الاتصالات</li>
+                            <li><i class="fas fa-check"></i> جميع إصدارات iOS</li>
+                            <li><i class="fas fa-check"></i> فتح دائم</li>
+                            <li><i class="fas fa-check"></i> 24-48 ساعة</li>
+                        </ul>
+                        <button class="btn-price" onclick="selectUnlock('iPhone', 299)">اطلب الآن</button>
+                    </div>
+                </div>
+
+                <div class="price-card featured">
+                    <div class="featured-badge">الأكثر طلباً</div>
+                    <div class="price-header">
+                        <i class="fab fa-android"></i>
+                        <h3>Samsung Unlock</h3>
+                    </div>
+                    <div class="price-body">
+                        <div class="price-amount">
+                            <span class="currency">MAD</span>
+                            <span class="amount">199</span>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check"></i> فتح شبكة الاتصالات</li>
+                            <li><i class="fas fa-check"></i> جميع طرازات Samsung</li>
+                            <li><i class="fas fa-check"></i> فتح فوري</li>
+                            <li><i class="fas fa-check"></i> ضمان مدى الحياة</li>
+                        </ul>
+                        <button class="btn-price" onclick="selectUnlock('Samsung', 199)">اطلب الآن</button>
+                    </div>
+                </div>
+
+                <div class="price-card">
+                    <div class="price-header">
+                        <i class="fas fa-mobile"></i>
+                        <h3>Other Brands</h3>
+                    </div>
+                    <div class="price-body">
+                        <div class="price-amount">
+                            <span class="currency">MAD</span>
+                            <span class="amount">149</span>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check"></i> Huawei, Xiaomi, Oppo</li>
+                            <li><i class="fas fa-check"></i> فتح سريع</li>
+                            <li><i class="fas fa-check"></i> دعم فني مجاني</li>
+                            <li><i class="fas fa-check"></i> 12-24 ساعة</li>
+                        </ul>
+                        <button class="btn-price" onclick="selectUnlock('Other', 149)">اطلب الآن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="order-section" id="orderForm" style="display: none;">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2>اطلب خدمة فتح الأجهزة</h2>
+                <form id="unlockForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>نوع الجهاز</label>
+                            <input type="text" id="deviceType" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>السعر</label>
+                            <input type="text" id="price" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>العلامة التجارية</label>
+                            <select id="brand" required>
+                                <option value="">اختر العلامة</option>
+                                <option value="Apple">Apple</option>
+                                <option value="Samsung">Samsung</option>
+                                <option value="Huawei">Huawei</option>
+                                <option value="Xiaomi">Xiaomi</option>
+                                <option value="Oppo">Oppo</option>
+                                <option value="Other">أخرى</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>الموديل</label>
+                            <input type="text" id="model" placeholder="مثال: iPhone 12, Galaxy S21" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>IMEI Number</label>
+                        <input type="text" id="imei" placeholder="*#06# للحصول على IMEI" maxlength="15" required>
+                        <small>اطلب *#06# من الهاتف للحصول على رقم IMEI</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الشبكة الحالية (المقفول عليها)</label>
+                        <select id="currentNetwork" required>
+                            <option value="">اختر الشبكة</option>
+                            <option value="Maroc Telecom">Maroc Telecom</option>
+                            <option value="Orange">Orange</option>
+                            <option value="Inwi">Inwi</option>
+                            <option value="International">دولي (International)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ملاحظات إضافية</label>
+                        <textarea id="notes" rows="3" placeholder="أي معلومات إضافية..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i>
+                            إرسال الطلب
+                        </button>
+                        <button type="button" class="btn-cancel" onclick="hideOrderForm()">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tech Services</h3>
+                    <p>نقدم أفضل خدمات فتح الأجهزة بجودة عالية وأسعار منافسة</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="../index.html">الرئيسية</a></li>
+                        <li><a href="../index.html#services">خدماتنا</a></li>
+                        <li><a href="../index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <p><i class="fas fa-envelope"></i> info@techservices.com</p>
+                    <p><i class="fas fa-phone"></i> +212 600 000 000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tech Services. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        let selectedDevice = '';
+        let selectedPrice = 0;
+
+        function selectUnlock(device, price) {
+            selectedDevice = device;
+            selectedPrice = price;
+            document.getElementById('deviceType').value = device;
+            document.getElementById('price').value = price + ' MAD';
+            document.getElementById('orderForm').style.display = 'block';
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideOrderForm() {
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('unlockForm').reset();
+        }
+
+        document.getElementById('unlockForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                serviceType: 'unlock',
+                deviceType: selectedDevice,
+                brand: document.getElementById('brand').value,
+                model: document.getElementById('model').value,
+                imei: document.getElementById('imei').value,
+                currentNetwork: document.getElementById('currentNetwork').value,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                notes: document.getElementById('notes').value,
+                price: selectedPrice
+            };
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.');
+                    hideOrderForm();
+                } else {
+                    alert('❌ حدث خطأ. الرجاء المحاولة مرة أخرى.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('❌ حدث خطأ في الاتصال. الرجاء المحاولة مرة أخرى.');
+            }
+        });
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+</body>
+</html>

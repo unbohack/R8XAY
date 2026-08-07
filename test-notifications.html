@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار الإشعارات - Test Notifications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid #e9ecef;
+        }
+
+        .test-section h2 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            color: #495057;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-right: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .info-box p {
+            color: #0d47a1;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .info-box strong {
+            color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 اختبار نظام الإشعارات</h1>
+        <p class="subtitle">اختبر وصول الطلبات والرسائل إلى لوحة الإدارة</p>
+
+        <!-- Test Order -->
+        <div class="test-section">
+            <h2><span class="icon">📦</span> اختبار طلب IMEI</h2>
+            
+            <div class="form-group">
+                <label>رقم IMEI:</label>
+                <input type="text" id="imei" value="353287110123456" placeholder="أدخل رقم IMEI">
+            </div>
+
+            <div class="form-group">
+                <label>الاسم:</label>
+                <input type="text" id="orderName" value="أحمد محمد" placeholder="اسمك الكامل">
+            </div>
+
+            <div class="form-group">
+                <label>البريد الإلكتروني:</label>
+                <input type="email" id="orderEmail" value="test@example.com" placeholder="example@mail.com">
+            </div>
+
+            <div class="form-group">
+                <label>رقم الهاتف:</label>
+                <input type="tel" id="orderPhone" value="0612345678" placeholder="06XXXXXXXX">
+            </div>
+
+            <button onclick="testOrder()">📤 إرسال طلب تجريبي</button>
+            <div id="orderStatus" class="status"></div>
+        </div>
+
+        <!-- Test Contact Message -->
+        <div class="test-section">
+            <h2><span class="icon">💬</span> اختبار رسالة تواصل</h2>
+            
+            <div class="form-group">
+                <label>الاسم:</label>
+                <input type="text" id="contactName" value="فاطمة الزهراء" placeholder="اسمك الكامل">
+            </div>
+
+            <div class="form-group">
+                <label>البريد الإلكتروني:</label>
+                <input type="email" id="contactEmail" value="contact@example.com" placeholder="example@mail.com">
+            </div>
+
+            <div class="form-group">
+                <label>رقم الهاتف:</label>
+                <input type="tel" id="contactPhone" value="0698765432" placeholder="06XXXXXXXX">
+            </div>
+
+            <div class="form-group">
+                <label>الرسالة:</label>
+                <textarea id="contactMessage" placeholder="اكتب رسالتك هنا...">مرحباً، أريد الاستفسار عن خدماتكم. هل يمكنكم مساعدتي؟</textarea>
+            </div>
+
+            <button onclick="testContact()">📤 إرسال رسالة تجريبية</button>
+            <div id="contactStatus" class="status"></div>
+        </div>
+
+        <div class="info-box">
+            <p><strong>📋 تعليمات الاختبار:</strong></p>
+            <p>1️⃣ افتح لوحة الإدارة في تبويب آخر: <a href="/admin" target="_blank" style="color: #1565c0;">http://localhost:3000/admin</a></p>
+            <p>2️⃣ اضغط على أحد الأزرار لإرسال طلب أو رسالة</p>
+            <p>3️⃣ راقب ظهور الإشعار في لوحة الإدارة فوراً ⚡</p>
+            <p>4️⃣ تحقق من عداد الإشعارات الأحمر 🔴</p>
+        </div>
+    </div>
+
+    <script>
+        // Test IMEI Order
+        async function testOrder() {
+            const statusDiv = document.getElementById('orderStatus');
+            statusDiv.className = 'status';
+            statusDiv.textContent = '⏳ جاري إرسال الطلب...';
+            statusDiv.style.display = 'block';
+
+            try {
+                const response = await fetch('http://localhost:3000/api/imei/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        imei: document.getElementById('imei').value,
+                        serviceType: 'icloud-check',
+                        name: document.getElementById('orderName').value,
+                        email: document.getElementById('orderEmail').value,
+                        phone: document.getElementById('orderPhone').value
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    statusDiv.className = 'status success';
+                    statusDiv.innerHTML = `
+                        ✅ تم إرسال الطلب بنجاح!<br>
+                        رقم الطلب: <strong>${data.data.orderId}</strong><br>
+                        السعر: <strong>${data.data.price} درهم</strong><br>
+                        <small>تحقق من لوحة الإدارة الآن! 👀</small>
+                    `;
+                } else {
+                    throw new Error(data.message || 'فشل إرسال الطلب');
+                }
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.textContent = '❌ خطأ: ' + error.message;
+            }
+        }
+
+        // Test Contact Message
+        async function testContact() {
+            const statusDiv = document.getElementById('contactStatus');
+            statusDiv.className = 'status';
+            statusDiv.textContent = '⏳ جاري إرسال الرسالة...';
+            statusDiv.style.display = 'block';
+
+            try {
+                const response = await fetch('http://localhost:3000/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById('contactName').value,
+                        email: document.getElementById('contactEmail').value,
+                        phone: document.getElementById('contactPhone').value,
+                        message: document.getElementById('contactMessage').value
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    statusDiv.className = 'status success';
+                    statusDiv.innerHTML = `
+                        ✅ تم إرسال الرسالة بنجاح!<br>
+                        <small>تحقق من لوحة الإدارة الآن! 👀</small>
+                    `;
+                } else {
+                    throw new Error(data.message || 'فشل إرسال الرسالة');
+                }
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.textContent = '❌ خطأ: ' + error.message;
+            }
+        }
+
+        // Auto-fill with random test data
+        function randomizeData() {
+            const names = ['أحمد محمد', 'فاطمة الزهراء', 'محمد علي', 'سارة حسن', 'يوسف إبراهيم'];
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            
+            document.getElementById('orderName').value = randomName;
+            document.getElementById('contactName').value = randomName;
+            
+            const randomPhone = '06' + Math.floor(10000000 + Math.random() * 90000000);
+            document.getElementById('orderPhone').value = randomPhone;
+            document.getElementById('contactPhone').value = randomPhone;
+        }
+
+        // Initialize
+        console.log('🧪 Test page loaded. Ready to test notifications!');
+        console.log('📍 Server: http://localhost:3000');
+        console.log('👨‍💼 Admin: http://localhost:3000/admin');
+    </script>
+</body>
+</html>

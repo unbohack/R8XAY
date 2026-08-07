@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراقب الإشعارات - Notification Monitor</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+        }
+
+        .header {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .status {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+
+        .status.connected {
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            animation: pulse 2s infinite;
+        }
+
+        .status.disconnected {
+            background: #ff0000;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .controls {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #0f3460;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #e94560;
+            transform: translateY(-2px);
+        }
+
+        .notifications {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #e94560;
+            animation: slideIn 0.5s;
+        }
+
+        .notification-item.order {
+            border-left-color: #00d9ff;
+        }
+
+        .notification-item.message {
+            border-left-color: #ffd700;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification-time {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .notification-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e94560;
+        }
+
+        .notification-item.order .notification-title {
+            color: #00d9ff;
+        }
+
+        .notification-item.message .notification-title {
+            color: #ffd700;
+        }
+
+        .notification-body {
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #e94560;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .clear-btn {
+            background: #e94560;
+        }
+
+        .clear-btn:hover {
+            background: #c23550;
+        }
+
+        pre {
+            background: #0a0e27;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔔 مراقب الإشعارات المباشر</h1>
+        <p>
+            <span class="status" id="socketStatus"></span>
+            <span id="statusText">جاري الاتصال...</span>
+        </p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number" id="orderCount">0</div>
+            <div class="stat-label">📦 طلبات</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="messageCount">0</div>
+            <div class="stat-label">💬 رسائل</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="totalCount">0</div>
+            <div class="stat-label">📊 المجموع</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="testOrder()">📦 إرسال طلب تجريبي</button>
+        <button onclick="testMessage()">💬 إرسال رسالة تجريبية</button>
+        <button class="clear-btn" onclick="clearNotifications()">🗑️ مسح الإشعارات</button>
+        <button onclick="location.reload()">🔄 تحديث الصفحة</button>
+    </div>
+
+    <div class="notifications" id="notifications">
+        <p style="text-align: center; color: #888;">في انتظار الإشعارات...</p>
+    </div>
+
+    <script>
+        let socket;
+        let orderCount = 0;
+        let messageCount = 0;
+
+        // Initialize Socket.IO
+        function initSocket() {
+            socket = io(window.location.origin);
+
+            socket.on('connect', () => {
+                console.log('✅ Socket.IO connected!');
+                updateStatus(true);
+                addLog('Socket.IO', 'تم الاتصال بالسيرفر بنجاح!', 'success');
+            });
+
+            socket.on('disconnect', () => {
+                console.log('❌ Socket.IO disconnected!');
+                updateStatus(false);
+                addLog('Socket.IO', 'تم قطع الاتصال بالسيرفر', 'error');
+            });
+
+            socket.on('new-order', (data) => {
+                console.log('📦 New Order Received:', data);
+                orderCount++;
+                updateStats();
+                addNotification('طلب جديد', data, 'order');
+                playSound();
+            });
+
+            socket.on('new-message', (data) => {
+                console.log('💬 New Message Received:', data);
+                messageCount++;
+                updateStats();
+                addNotification('رسالة جديدة', data, 'message');
+                playSound();
+            });
+
+            socket.on('notification', (data) => {
+                console.log('🔔 Notification:', data);
+                addNotification('إشعار عام', data, 'general');
+            });
+        }
+
+        function updateStatus(connected) {
+            const status = document.getElementById('socketStatus');
+            const text = document.getElementById('statusText');
+            
+            if (connected) {
+                status.className = 'status connected';
+                text.textContent = 'متصل بالسيرفر';
+            } else {
+                status.className = 'status disconnected';
+                text.textContent = 'غير متصل';
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('orderCount').textContent = orderCount;
+            document.getElementById('messageCount').textContent = messageCount;
+            document.getElementById('totalCount').textContent = orderCount + messageCount;
+        }
+
+        function addNotification(title, data, type) {
+            const container = document.getElementById('notifications');
+            
+            // Remove placeholder
+            if (container.children.length === 1 && container.children[0].tagName === 'P') {
+                container.innerHTML = '';
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification-item ${type}`;
+            
+            const time = new Date().toLocaleTimeString('ar-MA');
+            
+            let icon = '🔔';
+            if (type === 'order') icon = '📦';
+            if (type === 'message') icon = '💬';
+            
+            notification.innerHTML = `
+                <div class="notification-time">${time}</div>
+                <div class="notification-title">${icon} ${title}</div>
+                <div class="notification-body">
+                    ${formatNotificationData(data, type)}
+                </div>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+            
+            container.insertBefore(notification, container.firstChild);
+        }
+
+        function formatNotificationData(data, type) {
+            if (type === 'order') {
+                return `
+                    <strong>الزبون:</strong> ${data.customerName || 'غير محدد'}<br>
+                    <strong>الخدمة:</strong> ${data.serviceName || data.serviceType || 'غير محدد'}<br>
+                    <strong>السعر:</strong> ${data.price || 0} درهم<br>
+                    <strong>رقم الطلب:</strong> ${data.orderId || 'غير محدد'}
+                `;
+            } else if (type === 'message') {
+                return `
+                    <strong>الاسم:</strong> ${data.name || 'غير محدد'}<br>
+                    <strong>البريد:</strong> ${data.email || 'غير محدد'}<br>
+                    <strong>الهاتف:</strong> ${data.phone || 'غير محدد'}<br>
+                    <strong>الرسالة:</strong> ${data.message || 'غير محدد'}
+                `;
+            } else {
+                return JSON.stringify(data, null, 2);
+            }
+        }
+
+        function addLog(source, message, type) {
+            console.log(`[${source}] ${message}`);
+        }
+
+        function clearNotifications() {
+            const container = document.getElementById('notifications');
+            container.innerHTML = '<p style="text-align: center; color: #888;">في انتظار الإشعارات...</p>';
+            orderCount = 0;
+            messageCount = 0;
+            updateStats();
+        }
+
+        function playSound() {
+            const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBzbM7O6JNCgGHW7A7OShWRULSnD');
+            audio.volume = 0.5;
+            audio.play().catch(e => console.log('Sound error:', e));
+        }
+
+        // Test functions
+        async function testOrder() {
+            try {
+                const response = await fetch('/api/imei/order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        imei: '353287110123456',
+                        serviceType: 'icloud-check',
+                        name: 'أحمد محمد',
+                        email: 'test@example.com',
+                        phone: '0612345678'
+                    })
+                });
+                const data = await response.json();
+                console.log('Order response:', data);
+                if (data.success) {
+                    alert('✅ تم إرسال الطلب بنجاح!');
+                } else {
+                    alert('❌ خطأ: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Order error:', error);
+                alert('❌ خطأ في الإرسال: ' + error.message);
+            }
+        }
+
+        async function testMessage() {
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: 'فاطمة الزهراء',
+                        email: 'contact@example.com',
+                        phone: '0698765432',
+                        message: 'مرحباً، هذه رسالة اختبار للتحقق من وصول الإشعارات!'
+                    })
+                });
+                const data = await response.json();
+                console.log('Message response:', data);
+                if (data.success) {
+                    alert('✅ تم إرسال الرسالة بنجاح!');
+                } else {
+                    alert('❌ خطأ: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Message error:', error);
+                alert('❌ خطأ في الإرسال: ' + error.message);
+            }
+        }
+
+        // Initialize on page load
+        initSocket();
+        console.log('🔔 Notification Monitor Ready!');
+    </script>
+</body>
+</html>

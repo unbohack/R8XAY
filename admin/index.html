@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - خدمات التقنية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-shield-alt"></i>
+                <h1>لوحة التحكم</h1>
+                <p>تسجيل الدخول للإدارة</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                </div>
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-server"></i>
+                <h2>خدمات التقنية</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>لوحة المعلومات</span>
+                </a>
+                <a href="#orders" class="nav-link" data-page="orders">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>الطلبات</span>
+                    <span class="badge" id="ordersBadge">0</span>
+                </a>
+                <a href="#payments" class="nav-link" data-page="payments">
+                    <i class="fas fa-credit-card"></i>
+                    <span>المدفوعات</span>
+                </a>
+                <a href="#contacts" class="nav-link" data-page="contacts">
+                    <i class="fas fa-envelope"></i>
+                    <span>الرسائل</span>
+                    <span class="badge" id="contactsBadge">0</span>
+                </a>
+                <a href="#chat" class="nav-link" data-page="chat">
+                    <i class="fas fa-comments"></i>
+                    <span>الدردشة المباشرة</span>
+                    <span class="badge badge-success" id="chatBadge">0</span>
+                </a>
+                <a href="#users" class="nav-link" data-page="users">
+                    <i class="fas fa-users"></i>
+                    <span>المستخدمين</span>
+                </a>
+                <a href="#settings" class="nav-link" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>الإعدادات</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="pageTitle">لوحة المعلومات</h1>
+                </div>
+                <div class="topbar-right">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">0</span>
+                    </div>
+                    <div class="admin-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="adminName">المدير</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Dashboard Page -->
+                <div id="dashboardPage" class="page active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalOrders">0</h3>
+                                <p>إجمالي الطلبات</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="pendingOrders">0</h3>
+                                <p>طلبات قيد الانتظار</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="completedOrders">0</h3>
+                                <p>طلبات مكتملة</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalRevenue">$0</h3>
+                                <p>إجمالي الإيرادات</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>الطلبات الأخيرة</h3>
+                            <div id="recentOrdersTable" class="table-responsive"></div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>توزيع الخدمات</h3>
+                            <canvas id="servicesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Page -->
+                <div id="ordersPage" class="page">
+                    <div class="page-header">
+                        <h2>إدارة الطلبات</h2>
+                        <div class="filters">
+                            <select id="orderStatusFilter">
+                                <option value="">جميع الحالات</option>
+                                <option value="pending">قيد الانتظار</option>
+                                <option value="processing">قيد المعالجة</option>
+                                <option value="completed">مكتمل</option>
+                                <option value="cancelled">ملغي</option>
+                            </select>
+                            <select id="orderServiceFilter">
+                                <option value="">جميع الخدمات</option>
+                                <option value="server">Server Service</option>
+                                <option value="imei">IMEI Service</option>
+                                <option value="remote">Remote Service</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="ordersTable" class="table-responsive"></div>
+                </div>
+
+                <!-- Payments Page -->
+                <div id="paymentsPage" class="page">
+                    <div class="page-header">
+                        <h2>المدفوعات</h2>
+                    </div>
+                    <div id="paymentsTable" class="table-responsive"></div>
+                </div>
+
+                <!-- Contacts Page -->
+                <div id="contactsPage" class="page">
+                    <div class="page-header">
+                        <h2>رسائل الاتصال</h2>
+                    </div>
+                    <div id="contactsTable" class="table-responsive"></div>
+                </div>
+
+                <!-- Chat Page -->
+                <div id="chatPage" class="page">
+                    <div class="chat-container">
+                        <div class="chat-sessions">
+                            <div class="sessions-header">
+                                <h3>الجلسات النشطة</h3>
+                            </div>
+                            <div id="sessionsList" class="sessions-list"></div>
+                        </div>
+                        <div class="chat-window">
+                            <div class="chat-header">
+                                <h3 id="chatSessionTitle">اختر جلسة</h3>
+                            </div>
+                            <div id="chatMessages" class="chat-messages"></div>
+                            <div class="chat-input">
+                                <input type="text" id="messageInput" placeholder="اكتب رسالتك...">
+                                <button onclick="sendMessage()">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Page -->
+                <div id="usersPage" class="page">
+                    <div class="page-header">
+                        <h2>إدارة المستخدمين</h2>
+                        <button onclick="openAddUserModal()" class="btn-primary">
+                            <i class="fas fa-plus"></i> إضافة مستخدم
+                        </button>
+                    </div>
+                    <div id="usersTable" class="table-responsive"></div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settingsPage" class="page">
+                    <div class="page-header">
+                        <h2>الإعدادات</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3>إعدادات الموقع</h3>
+                            <form id="siteSettingsForm">
+                                <div class="form-group">
+                                    <label>اسم الموقع</label>
+                                    <input type="text" value="خدمات التقنية">
+                                </div>
+                                <div class="form-group">
+                                    <label>البريد الإلكتروني</label>
+                                    <input type="email" value="info@techservices.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>رقم الهاتف</label>
+                                    <input type="tel" value="+212 600 000 000">
+                                </div>
+                                <button type="submit" class="btn-primary">حفظ التغييرات</button>
+                            </form>
+                        </div>
+                        <div class="settings-card">
+                            <h3>إعدادات الإشعارات</h3>
+                            <div class="setting-item">
+                                <label>إشعارات الطلبات الجديدة</label>
+                                <input type="checkbox" checked>
+                            </div>
+                            <div class="setting-item">
+                                <label>إشعارات المدفوعات</label>
+                                <input type="checkbox" checked>
+                            </div>
+                            <div class="setting-item">
+                                <label>إشعارات الرسائل</label>
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="admin-script.js"></script>
+</body>
+</html>

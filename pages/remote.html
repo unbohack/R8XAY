@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Service - خدمات الدعم عن بعد</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-server"></i>
+                <span>خدمات التقنية</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../index.html#services">الخدمات</a></li>
+                <li><a href="../index.html#about">من نحن</a></li>
+                <li><a href="../index.html#contact">اتصل بنا</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header gradient-3">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <h1>Remote Service</h1>
+                <p>خدمات الدعم الفني عن بعد وحل المشاكل التقنية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Support -->
+    <section class="quick-support">
+        <div class="container">
+            <div class="support-card">
+                <div class="support-header">
+                    <i class="fas fa-headset"></i>
+                    <h2>هل تحتاج لمساعدة فورية؟</h2>
+                    <p>فريقنا جاهز لمساعدتك على مدار الساعة</p>
+                </div>
+                <div class="support-options">
+                    <div class="support-option">
+                        <i class="fas fa-comments"></i>
+                        <h3>دردشة مباشرة</h3>
+                        <button class="btn btn-primary" onclick="startChat()">ابدأ الدردشة</button>
+                    </div>
+                    <div class="support-option">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>اتصال هاتفي</h3>
+                        <a href="tel:+212600000000" class="btn btn-outline">اتصل الآن</a>
+                    </div>
+                    <div class="support-option">
+                        <i class="fas fa-video"></i>
+                        <h3>جلسة مباشرة</h3>
+                        <button class="btn btn-primary" onclick="openOrderModal('session')">احجز جلسة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Details -->
+    <section class="service-details">
+        <div class="container">
+            <div class="details-grid">
+                <div class="details-content">
+                    <h2>خدمات الدعم الفني عن بعد</h2>
+                    <p>نوفر لك دعماً فنياً متخصصاً عن بعد لحل جميع مشاكلك التقنية بسرعة وفعالية. فريقنا المحترف مستعد لمساعدتك في أي وقت.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>حل المشاكل التقنية</h3>
+                                <p>تشخيص وحل جميع المشاكل التقنية في الأجهزة والبرامج</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>تثبيت البرامج</h3>
+                                <p>تثبيت وإعداد البرامج والتطبيقات المختلفة</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>تحديث الأنظمة</h3>
+                                <p>تحديث نظام التشغيل والبرامج لأحدث الإصدارات</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-virus"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>إزالة الفيروسات</h3>
+                                <p>فحص وتنظيف الجهاز من الفيروسات والبرامج الضارة</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>تحسين الأداء</h3>
+                                <p>تحسين أداء الجهاز وتسريع النظام</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>تدريب وإرشاد</h3>
+                                <p>تعليم استخدام البرامج والأدوات التقنية</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>استعادة البيانات</h3>
+                                <p>استرجاع البيانات المفقودة والنسخ الاحتياطي</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>إعداد الشبكات</h3>
+                                <p>إعداد وتكوين الشبكات المنزلية والمكتبية</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="how-it-works">
+                        <h3>كيف تعمل الخدمة؟</h3>
+                        <div class="steps-grid">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <h4>اتصل بنا</h4>
+                                <p>اختر طريقة التواصل المناسبة لك</p>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <h4>اشرح المشكلة</h4>
+                                <p>أخبرنا بالمشكلة التي تواجهها</p>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <h4>الاتصال عن بعد</h4>
+                                <p>سنتصل بجهازك بشكل آمن</p>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <h4>الحل</h4>
+                                <p>سنحل المشكلة مباشرة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="supported-systems">
+                        <h3>الأنظمة المدعومة</h3>
+                        <div class="systems-grid">
+                            <div class="system-item">
+                                <i class="fab fa-windows"></i>
+                                <span>Windows</span>
+                            </div>
+                            <div class="system-item">
+                                <i class="fab fa-apple"></i>
+                                <span>macOS</span>
+                            </div>
+                            <div class="system-item">
+                                <i class="fab fa-linux"></i>
+                                <span>Linux</span>
+                            </div>
+                            <div class="system-item">
+                                <i class="fab fa-android"></i>
+                                <span>Android</span>
+                            </div>
+                            <div class="system-item">
+                                <i class="fab fa-apple"></i>
+                                <span>iOS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-sidebar">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>جلسة واحدة</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">19</span>
+                                <span class="period">/جلسة</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> جلسة واحدة (ساعة)</li>
+                            <li><i class="fas fa-check"></i> حل مشكلة واحدة</li>
+                            <li><i class="fas fa-check"></i> دعم فوري</li>
+                            <li><i class="fas fa-check"></i> اتصال آمن</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="openOrderModal('single')">احجز الآن</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="badge">الأكثر طلباً</div>
+                        <div class="pricing-header">
+                            <h3>باقة شهرية</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">49</span>
+                                <span class="period">/شهرياً</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> جلسات غير محدودة</li>
+                            <li><i class="fas fa-check"></i> دعم على مدار الساعة</li>
+                            <li><i class="fas fa-check"></i> أولوية في الرد</li>
+                            <li><i class="fas fa-check"></i> استشارات مجانية</li>
+                            <li><i class="fas fa-check"></i> صيانة دورية</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="openOrderModal('monthly')">اشترك الآن</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>باقة سنوية</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">399</span>
+                                <span class="period">/سنوياً</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> جلسات غير محدودة</li>
+                            <li><i class="fas fa-check"></i> دعم VIP 24/7</li>
+                            <li><i class="fas fa-check"></i> فني مخصص</li>
+                            <li><i class="fas fa-check"></i> زيارات ميدانية (3)</li>
+                            <li><i class="fas fa-check"></i> خصم 30%</li>
+                            <li><i class="fas fa-check"></i> ضمان كامل</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="openOrderModal('yearly')">اشترك الآن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>طلب خدمة Remote Service</h2>
+            <form id="orderForm" class="order-form">
+                <input type="hidden" id="packageType" name="package">
+                
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>نوع المشكلة</label>
+                    <select name="issueType" required>
+                        <option value="">اختر نوع المشكلة</option>
+                        <option value="software">مشكلة في البرامج</option>
+                        <option value="hardware">مشكلة في الجهاز</option>
+                        <option value="network">مشاكل الشبكة</option>
+                        <option value="virus">فيروسات</option>
+                        <option value="performance">بطء الجهاز</option>
+                        <option value="installation">تثبيت برامج</option>
+                        <option value="other">أخرى</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>نظام التشغيل</label>
+                    <select name="os" required>
+                        <option value="">اختر نظام التشغيل</option>
+                        <option value="windows">Windows</option>
+                        <option value="mac">macOS</option>
+                        <option value="linux">Linux</option>
+                        <option value="android">Android</option>
+                        <option value="ios">iOS</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>موعد مفضل للجلسة</label>
+                    <input type="datetime-local" name="preferredTime">
+                </div>
+
+                <div class="form-group">
+                    <label>وصف المشكلة</label>
+                    <textarea name="details" rows="4" placeholder="اشرح المشكلة بالتفصيل..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>خدمات التقنية</h3>
+                    <p>نوفر لك أفضل الحلول التقنية بجودة عالية وأسعار مناسبة</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="../index.html">الرئيسية</a></li>
+                        <li><a href="../index.html#services">الخدمات</a></li>
+                        <li><a href="../index.html#about">من نحن</a></li>
+                        <li><a href="../index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>خدماتنا</h3>
+                    <ul>
+                        <li><a href="server.html">Server Service</a></li>
+                        <li><a href="imei.html">IMEI Service</a></li>
+                        <li><a href="remote.html">Remote Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 خدمات التقنية. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
+    <script src="../js/enhancements.js"></script>
+</body>
+</html>

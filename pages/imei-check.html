@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فحص IMEI مجاني - Tech Services</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .imei-checker {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.1);
+        }
+
+        .checker-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .checker-header h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .checker-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .imei-input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .imei-input-group input {
+            width: 100%;
+            padding: 18px 60px 18px 20px;
+            border: 3px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .imei-input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .imei-input-group .check-btn {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6366F1 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .imei-input-group .check-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .imei-input-group .check-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .loading i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .result-card {
+            display: none;
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .result-card.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .result-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6366F1 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .result-title h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .result-title p {
+            color: #64748b;
+            margin: 5px 0 0 0;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #f3f4f6;
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.1);
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-badge.clean {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-badge.blacklisted {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-badge.unknown {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .info-box {
+            background: #f0f9ff;
+            border: 2px solid #bae6fd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .info-box i {
+            color: #0284c7;
+            margin-left: 10px;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #0c4a6e;
+            line-height: 1.6;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            border: 2px solid #fecaca;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .error-message i {
+            margin-left: 10px;
+        }
+
+        .how-to-find {
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 40px;
+        }
+
+        .how-to-find h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .how-to-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .step-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .step-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .step-item h4 {
+            color: white;
+            margin: 10px 0;
+        }
+
+        .step-item p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        [data-theme="dark"] .imei-checker {
+            background: #1e293b;
+        }
+
+        [data-theme="dark"] .detail-item {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        [data-theme="dark"] .detail-value {
+            color: #e2e8f0;
+        }
+
+        [data-theme="dark"] .result-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Tech Services</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../index.html#services">خدماتنا</a></li>
+                <li><a href="../index.html#contact">اتصل بنا</a></li>
+                <li><a href="../admin/index.html" class="btn-admin">لوحة التحكم</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="service-hero" style="background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);">
+        <div class="container">
+            <div class="hero-content">
+                <i class="fas fa-search"></i>
+                <h1>فحص IMEI مجاني 100%</h1>
+                <p>تحقق من حالة جهازك وتاريخه بشكل فوري ومجاني</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="imei-checker">
+            <div class="checker-header">
+                <h2>أدخل رقم IMEI</h2>
+                <p>15 رقم لفحص شامل وفوري</p>
+            </div>
+
+            <div class="imei-input-group">
+                <input 
+                    type="text" 
+                    id="imeiInput" 
+                    placeholder="مثال: 352012345678901"
+                    maxlength="15"
+                    pattern="[0-9]*"
+                >
+                <button class="check-btn" id="checkBtn">
+                    <i class="fas fa-search"></i> فحص
+                </button>
+            </div>
+
+            <div class="loading" id="loading">
+                <i class="fas fa-spinner"></i>
+                <p>جاري الفحص...</p>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText"></span>
+            </div>
+
+            <div class="result-card" id="resultCard">
+                <div class="result-header">
+                    <div class="result-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="result-title">
+                        <h3 id="deviceName">iPhone 14 Pro Max</h3>
+                        <p id="imeiNumber">IMEI: 352012345678901</p>
+                    </div>
+                </div>
+
+                <div class="result-details" id="resultDetails">
+                    <!-- سيتم ملؤها ديناميكياً -->
+                </div>
+
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <p><strong>ملاحظة:</strong> هذه المعلومات مأخوذة من قواعد البيانات العالمية وقد لا تكون دقيقة 100%. للحصول على تقرير مفصل، يرجى التواصل مع خدمة العملاء.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="how-to-find">
+            <h3><i class="fas fa-question-circle"></i> كيف تجد رقم IMEI؟</h3>
+            <div class="how-to-steps">
+                <div class="step-item">
+                    <i class="fas fa-phone"></i>
+                    <h4>طريقة 1</h4>
+                    <p>اطلب *#06# من الهاتف</p>
+                </div>
+                <div class="step-item">
+                    <i class="fas fa-cog"></i>
+                    <h4>طريقة 2</h4>
+                    <p>الإعدادات > حول الجهاز > IMEI</p>
+                </div>
+                <div class="step-item">
+                    <i class="fas fa-sim-card"></i>
+                    <h4>طريقة 3</h4>
+                    <p>على علبة الجهاز أو درج SIM</p>
+                </div>
+                <div class="step-item">
+                    <i class="fab fa-apple"></i>
+                    <h4>iPhone</h4>
+                    <p>الإعدادات > عام > حول</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const imeiInput = document.getElementById('imeiInput');
+        const checkBtn = document.getElementById('checkBtn');
+        const loading = document.getElementById('loading');
+        const resultCard = document.getElementById('resultCard');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const resultDetails = document.getElementById('resultDetails');
+        const deviceName = document.getElementById('deviceName');
+        const imeiNumber = document.getElementById('imeiNumber');
+
+        // قبول الأرقام فقط
+        imeiInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+
+        // فحص عند الضغط على Enter
+        imeiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkIMEI();
+            }
+        });
+
+        checkBtn.addEventListener('click', checkIMEI);
+
+        async function checkIMEI() {
+            const imei = imeiInput.value.trim();
+
+            // إخفاء الرسائل السابقة
+            resultCard.classList.remove('active');
+            errorMessage.classList.remove('active');
+
+            // التحقق من صحة IMEI
+            if (!imei) {
+                showError('الرجاء إدخال رقم IMEI');
+                return;
+            }
+
+            if (imei.length !== 15) {
+                showError('رقم IMEI يجب أن يكون 15 رقماً');
+                return;
+            }
+
+            if (!validateIMEI(imei)) {
+                showError('رقم IMEI غير صحيح. الرجاء التحقق من الرقم');
+                return;
+            }
+
+            // عرض Loading
+            loading.classList.add('active');
+            checkBtn.disabled = true;
+
+            try {
+                // محاكاة API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // بيانات تجريبية (يمكن استبدالها بـ API حقيقي)
+                const result = await fetchIMEIData(imei);
+
+                displayResult(result);
+            } catch (error) {
+                showError('حدث خطأ في الاتصال. الرجاء المحاولة مرة أخرى.');
+            } finally {
+                loading.classList.remove('active');
+                checkBtn.disabled = false;
+            }
+        }
+
+        function validateIMEI(imei) {
+            // Luhn algorithm للتحقق من IMEI
+            let sum = 0;
+            let shouldDouble = false;
+
+            for (let i = imei.length - 1; i >= 0; i--) {
+                let digit = parseInt(imei.charAt(i));
+
+                if (shouldDouble) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                }
+
+                sum += digit;
+                shouldDouble = !shouldDouble;
+            }
+
+            return (sum % 10) === 0;
+        }
+
+        async function fetchIMEIData(imei) {
+            // هنا يمكن استبدال هذا بـ API حقيقي
+            // مثل: https://imeicheck.com/api أو قاعدة بيانات خاصة
+
+            // بيانات تجريبية بناءً على أول 8 أرقام (TAC)
+            const tac = imei.substring(0, 8);
+            
+            // قاعدة بيانات مصغرة للأجهزة الشهيرة
+            const devices = {
+                '35201234': { brand: 'Apple', model: 'iPhone 14 Pro Max', color: 'Deep Purple' },
+                '35678901': { brand: 'Samsung', model: 'Galaxy S23 Ultra', color: 'Phantom Black' },
+                '35999888': { brand: 'Huawei', model: 'P50 Pro', color: 'Golden Black' },
+                '35111222': { brand: 'Xiaomi', model: 'Mi 13 Pro', color: 'Ceramic White' }
+            };
+
+            const device = devices[tac] || { 
+                brand: 'Unknown', 
+                model: 'Device Model Not Found',
+                color: 'N/A'
+            };
+
+            return {
+                imei: imei,
+                brand: device.brand,
+                model: device.model,
+                color: device.color,
+                status: Math.random() > 0.3 ? 'clean' : 'unknown',
+                warrantyStatus: Math.random() > 0.5 ? 'Active' : 'Expired',
+                carrier: 'Unlocked',
+                country: 'Global',
+                serialNumber: 'SN' + Math.random().toString(36).substring(2, 11).toUpperCase(),
+                manufactureDate: '2023-09',
+                findMyStatus: Math.random() > 0.5 ? 'OFF' : 'ON'
+            };
+        }
+
+        function displayResult(data) {
+            deviceName.textContent = `${data.brand} ${data.model}`;
+            imeiNumber.textContent = `IMEI: ${data.imei}`;
+
+            const statusClass = data.status === 'clean' ? 'clean' : 
+                               data.status === 'blacklisted' ? 'blacklisted' : 'unknown';
+            
+            const statusText = data.status === 'clean' ? '✓ نظيف' : 
+                              data.status === 'blacklisted' ? '✗ محظور' : '? غير معروف';
+
+            resultDetails.innerHTML = `
+                <div class="detail-item">
+                    <div class="detail-label">الحالة</div>
+                    <div class="detail-value">
+                        <span class="status-badge ${statusClass}">${statusText}</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">العلامة التجارية</div>
+                    <div class="detail-value">${data.brand}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">الموديل</div>
+                    <div class="detail-value">${data.model}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">اللون</div>
+                    <div class="detail-value">${data.color}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">حالة الضمان</div>
+                    <div class="detail-value">${data.warrantyStatus}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">الشبكة</div>
+                    <div class="detail-value">${data.carrier}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">الدولة</div>
+                    <div class="detail-value">${data.country}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">الرقم التسلسلي</div>
+                    <div class="detail-value">${data.serialNumber}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">تاريخ التصنيع</div>
+                    <div class="detail-value">${data.manufactureDate}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Find My</div>
+                    <div class="detail-value">${data.findMyStatus}</div>
+                </div>
+            `;
+
+            resultCard.classList.add('active');
+            resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.classList.add('active');
+        }
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMEI Service - خدمات IMEI</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-server"></i>
+                <span>خدمات التقنية</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../index.html#services">الخدمات</a></li>
+                <li><a href="../index.html#about">من نحن</a></li>
+                <li><a href="../index.html#contact">اتصل بنا</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header gradient-2">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h1>IMEI Service</h1>
+                <p>خدمات IMEI احترافية لجميع أنواع الهواتف الذكية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMEI Checker -->
+    <section class="imei-checker">
+        <div class="container">
+            <div class="checker-card">
+                <h2>فحص IMEI مجاني</h2>
+                <p>أدخل رقم IMEI الخاص بهاتفك للحصول على معلومات مفصلة</p>
+                <form id="imeiCheckForm" class="imei-form">
+                    <div class="input-group">
+                        <input type="text" id="imeiNumber" placeholder="أدخل رقم IMEI (15 رقم)" maxlength="15" pattern="\d{15}" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> فحص الآن
+                        </button>
+                    </div>
+                    <small>للحصول على رقم IMEI، اطلب *#06# من هاتفك</small>
+                </form>
+                <div id="imeiResult" class="imei-result" style="display: none;">
+                    <div class="result-header">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>نتائج الفحص</h3>
+                    </div>
+                    <div class="result-details"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Details -->
+    <section class="service-details">
+        <div class="container">
+            <div class="details-grid">
+                <div class="details-content">
+                    <h2>خدمات IMEI المتكاملة</h2>
+                    <p>نوفر لك أفضل خدمات IMEI للهواتف الذكية من جميع الأنواع والموديلات. خدماتنا آمنة وسريعة ومضمونة 100%.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-unlock"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>فك قفل الشبكة</h3>
+                                <p>إزالة قفل الشبكة من جميع أنواع الهواتف وجميع الشبكات العالمية</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>تقارير IMEI كاملة</h3>
+                                <p>تقارير مفصلة عن حالة الهاتف، تاريخه، وضمانه</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>فحص الضمان</h3>
+                                <p>التحقق من حالة الضمان ومعلومات الشراء الأصلية</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>فحص القائمة السوداء</h3>
+                                <p>التحقق من وجود الهاتف في القائمة السوداء للسرقة</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>إزالة iCloud Lock</h3>
+                                <p>خدمة إزالة قفل iCloud من أجهزة iPhone و iPad</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>معلومات الجهاز</h3>
+                                <p>الحصول على معلومات كاملة عن الموديل، المواصفات، والإصدار</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="supported-brands">
+                        <h3>العلامات التجارية المدعومة</h3>
+                        <div class="brands-grid">
+                            <div class="brand-item">
+                                <i class="fab fa-apple"></i>
+                                <span>Apple</span>
+                            </div>
+                            <div class="brand-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Samsung</span>
+                            </div>
+                            <div class="brand-item">
+                                <i class="fas fa-mobile"></i>
+                                <span>Huawei</span>
+                            </div>
+                            <div class="brand-item">
+                                <i class="fas fa-phone"></i>
+                                <span>Xiaomi</span>
+                            </div>
+                            <div class="brand-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Oppo</span>
+                            </div>
+                            <div class="brand-item">
+                                <i class="fas fa-mobile"></i>
+                                <span>Vivo</span>
+                            </div>
+                            <div class="brand-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>LG</span>
+                            </div>
+                            <div class="brand-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>وجميع العلامات</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-sidebar">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>فحص أساسي</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                                <span class="period">مجاناً</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> فحص IMEI مجاني</li>
+                            <li><i class="fas fa-check"></i> معلومات الموديل</li>
+                            <li><i class="fas fa-check"></i> حالة الضمان</li>
+                            <li><i class="fas fa-check"></i> معلومات أساسية</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="document.getElementById('imeiNumber').focus()">جرب الآن</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="badge">الأكثر طلباً</div>
+                        <div class="pricing-header">
+                            <h3>فك قفل الشبكة</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">29</span>
+                                <span class="period">/لكل جهاز</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> فك قفل جميع الشبكات</li>
+                            <li><i class="fas fa-check"></i> خدمة سريعة (24-48 ساعة)</li>
+                            <li><i class="fas fa-check"></i> ضمان 100%</li>
+                            <li><i class="fas fa-check"></i> دعم فني متواصل</li>
+                            <li><i class="fas fa-check"></i> بدون فقدان البيانات</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="openOrderModal('unlock')">اطلب الآن</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>تقرير متقدم</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">9</span>
+                                <span class="period">/تقرير</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> تقرير كامل مفصل</li>
+                            <li><i class="fas fa-check"></i> فحص القائمة السوداء</li>
+                            <li><i class="fas fa-check"></i> تاريخ الجهاز</li>
+                            <li><i class="fas fa-check"></i> معلومات الشبكة</li>
+                            <li><i class="fas fa-check"></i> حالة iCloud</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="openOrderModal('report')">اطلب الآن</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>إزالة iCloud</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">79</span>
+                                <span class="period">/جهاز iPhone</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> إزالة قفل iCloud</li>
+                            <li><i class="fas fa-check"></i> لجميع موديلات iPhone</li>
+                            <li><i class="fas fa-check"></i> خدمة آمنة ومضمونة</li>
+                            <li><i class="fas fa-check"></i> دعم فني مخصص</li>
+                            <li><i class="fas fa-check"></i> وقت تنفيذ: 3-7 أيام</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="openOrderModal('icloud')">اطلب الآن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>طلب خدمة IMEI</h2>
+            <form id="orderForm" class="order-form">
+                <input type="hidden" id="serviceType" name="service">
+                
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>رقم IMEI</label>
+                    <input type="text" name="imei" maxlength="15" pattern="\d{15}" placeholder="15 رقم" required>
+                </div>
+
+                <div class="form-group">
+                    <label>نوع الجهاز</label>
+                    <select name="deviceBrand" required>
+                        <option value="">اختر العلامة التجارية</option>
+                        <option value="apple">Apple iPhone</option>
+                        <option value="samsung">Samsung</option>
+                        <option value="huawei">Huawei</option>
+                        <option value="xiaomi">Xiaomi</option>
+                        <option value="oppo">Oppo</option>
+                        <option value="other">أخرى</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>الموديل</label>
+                    <input type="text" name="model" placeholder="مثال: iPhone 13 Pro" required>
+                </div>
+
+                <div class="form-group">
+                    <label>تفاصيل إضافية</label>
+                    <textarea name="details" rows="4" placeholder="أي تفاصيل إضافية أو ملاحظات"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>خدمات التقنية</h3>
+                    <p>نوفر لك أفضل الحلول التقنية بجودة عالية وأسعار مناسبة</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="../index.html">الرئيسية</a></li>
+                        <li><a href="../index.html#services">الخدمات</a></li>
+                        <li><a href="../index.html#about">من نحن</a></li>
+                        <li><a href="../index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>خدماتنا</h3>
+                    <ul>
+                        <li><a href="server.html">Server Service</a></li>
+                        <li><a href="imei.html">IMEI Service</a></li>
+                        <li><a href="remote.html">Remote Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 خدمات التقنية. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
+    <script src="../js/imei.js"></script>
+    <script src="../js/enhancements.js"></script>
+</body>
+</html>

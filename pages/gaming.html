@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمة بطاقات الألعاب - Tech Services</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>Tech Services</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../index.html#services">خدماتنا</a></li>
+                <li><a href="../index.html#contact">اتصل بنا</a></li>
+                <li><a href="../admin/index.html" class="btn-admin">لوحة التحكم</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="service-hero animate-fadeInDown" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+        <div class="container">
+            <div class="hero-content animate-fadeInUp">
+                <i class="fas fa-gamepad"></i>
+                <h1>بطاقات شحن الألعاب</h1>
+                <p>احصل على بطاقات شحن لجميع المنصات - PlayStation, Xbox, Steam وغيرها</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Info -->
+    <section class="service-info">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card animate-fadeInLeft">
+                    <i class="fas fa-bolt"></i>
+                    <h3>تسليم فوري</h3>
+                    <p>احصل على الكود فوراً بعد الدفع عبر البريد الإلكتروني</p>
+                </div>
+                <div class="info-card animate-fadeInUp">
+                    <i class="fas fa-shield-check"></i>
+                    <h3>أصلية ومضمونة</h3>
+                    <p>جميع البطاقات أصلية ومن مصادر موثوقة 100%</p>
+                </div>
+                <div class="info-card animate-fadeInRight">
+                    <i class="fas fa-tags"></i>
+                    <h3>أفضل الأسعار</h3>
+                    <p>أسعار تنافسية مع عروض خاصة وخصومات دائمة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gaming Cards Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">اختر منصتك المفضلة</h2>
+            
+            <!-- PlayStation Cards -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fab fa-playstation"></i> PlayStation Store
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>PSN $10</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">120</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('PlayStation', 'PSN $10', 120)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card featured">
+                        <div class="featured-badge">الأكثر مبيعاً</div>
+                        <div class="price-header">
+                            <h3>PSN $25</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">280</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('PlayStation', 'PSN $25', 280)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>PSN $50</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">540</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('PlayStation', 'PSN $50', 540)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Xbox Cards -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fab fa-xbox"></i> Xbox Live
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Xbox $10</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">120</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Xbox', 'Xbox $10', 120)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Xbox $25</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">280</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Xbox', 'Xbox $25', 280)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Xbox Game Pass</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">150</span>
+                                <small>/شهر</small>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Xbox', 'Xbox Game Pass', 150)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Steam Cards -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fab fa-steam"></i> Steam Wallet
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Steam $10</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">115</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Steam', 'Steam $10', 115)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Steam $20</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">220</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Steam', 'Steam $20', 220)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Steam $50</h3>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">520</span>
+                            </div>
+                            <button class="btn-price" onclick="selectCard('Steam', 'Steam $50', 520)">اشترِ الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="order-section" id="orderForm" style="display: none;">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2>اطلب بطاقة الشحن</h2>
+                <form id="gamingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>المنصة</label>
+                            <input type="text" id="platform" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>نوع البطاقة</label>
+                            <input type="text" id="cardType" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر</label>
+                        <input type="text" id="price" readonly>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="email" placeholder="سيتم إرسال الكود إلى هذا البريد" required>
+                        <small>⚠️ تأكد من صحة البريد الإلكتروني - سيتم إرسال الكود إليه</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ملاحظات إضافية</label>
+                        <textarea id="notes" rows="3" placeholder="أي معلومات إضافية..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-shopping-cart"></i>
+                            إتمام الشراء
+                        </button>
+                        <button type="button" class="btn-cancel" onclick="hideOrderForm()">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tech Services</h3>
+                    <p>أفضل بطاقات شحن الألعاب بأسعار منافسة</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="../index.html">الرئيسية</a></li>
+                        <li><a href="../index.html#services">خدماتنا</a></li>
+                        <li><a href="../index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <p><i class="fas fa-envelope"></i> info@techservices.com</p>
+                    <p><i class="fas fa-phone"></i> +212 600 000 000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tech Services. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        let selectedPlatform = '';
+        let selectedCardType = '';
+        let selectedPrice = 0;
+
+        function selectCard(platform, cardType, price) {
+            selectedPlatform = platform;
+            selectedCardType = cardType;
+            selectedPrice = price;
+            document.getElementById('platform').value = platform;
+            document.getElementById('cardType').value = cardType;
+            document.getElementById('price').value = price + ' MAD';
+            document.getElementById('orderForm').style.display = 'block';
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideOrderForm() {
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('gamingForm').reset();
+        }
+
+        document.getElementById('gamingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                serviceType: 'gaming',
+                platform: selectedPlatform,
+                cardType: selectedCardType,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                notes: document.getElementById('notes').value,
+                price: selectedPrice
+            };
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('✅ تم إرسال طلبك بنجاح! سنرسل الكود إلى بريدك الإلكتروني قريباً.');
+                    hideOrderForm();
+                } else {
+                    alert('❌ حدث خطأ. الرجاء المحاولة مرة أخرى.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('❌ حدث خطأ في الاتصال. الرجاء المحاولة مرة أخرى.');
+            }
+        });
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+    <style>
+        .platform-section {
+            margin: 50px 0;
+        }
+
+        .platform-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: fadeInLeft 0.6s ease-out;
+        }
+
+        .platform-title i {
+            font-size: 2.5rem;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .price-card {
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(79, 70, 229, 0.2);
+        }
+
+        .price-card.featured {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-180deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* Dark Mode Enhancements */
+        [data-theme="dark"] .service-hero {
+            background: linear-gradient(135deg, #6b21a8 0%, #dc2626 100%) !important;
+        }
+
+        [data-theme="dark"] .platform-title {
+            color: var(--accent-color);
+        }
+
+        [data-theme="dark"] .price-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-color: #334155;
+        }
+
+        [data-theme="dark"] .price-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</body>
+</html>

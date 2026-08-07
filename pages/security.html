@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمة الحماية - Tech Services</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>Tech Services</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../index.html#services">خدماتنا</a></li>
+                <li><a href="../index.html#contact">اتصل بنا</a></li>
+                <li><a href="../admin/index.html" class="btn-admin">لوحة التحكم</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="service-hero" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);">
+        <div class="container">
+            <div class="hero-content">
+                <i class="fas fa-shield-alt"></i>
+                <h1>خدمات الحماية والأمان</h1>
+                <p>احمِ أجهزتك وبياناتك مع أفضل برامج الحماية و VPN</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">اختر خدمة الحماية</h2>
+            
+            <!-- Antivirus -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fas fa-virus-slash"></i> برامج مكافحة الفيروسات
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Kaspersky</h3>
+                        </div>
+                        <div class="price-body">
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> حماية كاملة</li>
+                                <li><i class="fas fa-check"></i> جهاز واحد</li>
+                                <li><i class="fas fa-check"></i> تحديثات مستمرة</li>
+                            </ul>
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">299</span>
+                                <small>/سنة</small>
+                            </div>
+                            <button class="btn-price" onclick="selectSecurity('Kaspersky', 'سنة واحدة', 299)">اشترك الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card featured">
+                        <div class="featured-badge">الأكثر طلباً</div>
+                        <div class="price-header">
+                            <h3>Norton 360</h3>
+                        </div>
+                        <div class="price-body">
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> حماية شاملة</li>
+                                <li><i class="fas fa-check"></i> 3 أجهزة</li>
+                                <li><i class="fas fa-check"></i> VPN مدمج</li>
+                            </ul>
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">449</span>
+                                <small>/سنة</small>
+                            </div>
+                            <button class="btn-price" onclick="selectSecurity('Norton 360', 'سنة واحدة', 449)">اشترك الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>McAfee Total</h3>
+                        </div>
+                        <div class="price-body">
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> حماية متعددة</li>
+                                <li><i class="fas fa-check"></i> أجهزة غير محدودة</li>
+                                <li><i class="fas fa-check"></i> دعم 24/7</li>
+                            </ul>
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">499</span>
+                                <small>/سنة</small>
+                            </div>
+                            <button class="btn-price" onclick="selectSecurity('McAfee Total', 'سنة واحدة', 499)">اشترك الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VPN Services -->
+            <div class="platform-section">
+                <h3 class="platform-title">
+                    <i class="fas fa-user-secret"></i> خدمات VPN
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>NordVPN</h3>
+                        </div>
+                        <div class="price-body">
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> 6 أجهزة</li>
+                                <li><i class="fas fa-check"></i> 5400+ سيرفر</li>
+                                <li><i class="fas fa-check"></i> سرعة عالية</li>
+                            </ul>
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">99</span>
+                                <small>/شهر</small>
+                            </div>
+                            <button class="btn-price" onclick="selectSecurity('NordVPN', 'شهري', 99)">اشترك الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card featured">
+                        <div class="featured-badge">عرض خاص</div>
+                        <div class="price-header">
+                            <h3>ExpressVPN</h3>
+                        </div>
+                        <div class="price-body">
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> 5 أجهزة</li>
+                                <li><i class="fas fa-check"></i> أسرع VPN</li>
+                                <li><i class="fas fa-check"></i> 94 دولة</li>
+                            </ul>
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">899</span>
+                                <small>/سنة</small>
+                            </div>
+                            <button class="btn-price" onclick="selectSecurity('ExpressVPN', 'سنوي', 899)">اشترك الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>CyberGhost</h3>
+                        </div>
+                        <div class="price-body">
+                            <ul class="price-features">
+                                <li><i class="fas fa-check"></i> 7 أجهزة</li>
+                                <li><i class="fas fa-check"></i> 9000+ سيرفر</li>
+                                <li><i class="fas fa-check"></i> سعر مناسب</li>
+                            </ul>
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">249</span>
+                                <small>/سنة</small>
+                            </div>
+                            <button class="btn-price" onclick="selectSecurity('CyberGhost', 'سنوي', 249)">اشترك الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="order-section" id="orderForm" style="display: none;">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2>اطلب خدمة الحماية</h2>
+                <form id="securityForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>نوع الخدمة</label>
+                            <input type="text" id="serviceName" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>المدة</label>
+                            <input type="text" id="duration" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر</label>
+                        <input type="text" id="price" readonly>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="email" placeholder="لإرسال تفاصيل الاشتراك" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>نوع الجهاز</label>
+                        <select id="deviceType" required>
+                            <option value="">اختر الجهاز</option>
+                            <option value="Windows">Windows</option>
+                            <option value="Mac">Mac</option>
+                            <option value="Android">Android</option>
+                            <option value="iOS">iOS</option>
+                            <option value="Multiple">متعدد</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ملاحظات إضافية</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-shield-alt"></i>
+                            اشترك الآن
+                        </button>
+                        <button type="button" class="btn-cancel" onclick="hideOrderForm()">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tech Services. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        let selectedService = '';
+        let selectedDuration = '';
+        let selectedPrice = 0;
+
+        function selectSecurity(service, duration, price) {
+            selectedService = service;
+            selectedDuration = duration;
+            selectedPrice = price;
+            document.getElementById('serviceName').value = service;
+            document.getElementById('duration').value = duration;
+            document.getElementById('price').value = price + ' MAD';
+            document.getElementById('orderForm').style.display = 'block';
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideOrderForm() {
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('securityForm').reset();
+        }
+
+        document.getElementById('securityForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                serviceType: 'security',
+                serviceName: selectedService,
+                duration: selectedDuration,
+                deviceType: document.getElementById('deviceType').value,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                notes: document.getElementById('notes').value,
+                price: selectedPrice
+            };
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('✅ تم طلبك بنجاح! سنرسل تفاصيل الاشتراك قريباً.');
+                    hideOrderForm();
+                } else {
+                    alert('❌ حدث خطأ. الرجاء المحاولة مرة أخرى.');
+                }
+            } catch (error) {
+                alert('❌ حدث خطأ في الاتصال.');
+            }
+        });
+    </script>
+
+    <style>
+        .platform-section {
+            margin: 50px 0;
+        }
+
+        .platform-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .price-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .price-features li {
+            padding: 8px 0;
+            color: #666;
+        }
+
+        .price-features i {
+            color: #4CAF50;
+            margin-left: 10px;
+        }
+    </style>
+
+    <script src="../js/enhancements.js"></script>
+</body>
+</html>

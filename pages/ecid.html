@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل ECID - Tech Services</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body { font-family: Arial, sans-serif; background: #0f172a; color: #fff; }
+        .container { max-width: 700px; margin: 60px auto; padding: 24px; background: rgba(255,255,255,0.08); border-radius: 16px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        input, select, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #475569; background: #111827; color: #fff; }
+        button { background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; padding: 12px 18px; border-radius: 10px; cursor: pointer; }
+        .result { margin-top: 16px; padding: 12px; border-radius: 10px; background: #1f2937; display: none; }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>تسجيل ECID</h1>
+        <p>أدخل ECID أو الرقم التعريفي للجهاز وسيتم تسجيله في نظامنا.</p>
+
+        <form id="ecidForm">
+            <div class="form-group">
+                <label for="ecid">ECID</label>
+                <input id="ecid" name="ecid" placeholder="أدخل ECID" required>
+            </div>
+            <button type="submit">حفظ ECID</button>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('ecidForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resultBox = document.getElementById('result');
+            const payload = {
+                ecid: document.getElementById('ecid').value.trim()
+            };
+
+            resultBox.style.display = 'block';
+            resultBox.className = 'result';
+            resultBox.innerHTML = 'جاري الإرسال...';
+
+            try {
+                const response = await fetch('/api/ecid/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    resultBox.className = 'result success';
+                    resultBox.innerHTML = 'تم تسجيل ECID بنجاح. رقم التسجيل: ' + (data.recordId || '—');
+                } else {
+                    resultBox.className = 'result error';
+                    resultBox.innerHTML = data.message || 'فشل التسجيل';
+                }
+            } catch (error) {
+                resultBox.className = 'result error';
+                resultBox.innerHTML = 'حدث خطأ أثناء الإرسال';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمة الاتصالات - Tech Services</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Tech Services</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../index.html#services">خدماتنا</a></li>
+                <li><a href="../index.html#contact">اتصل بنا</a></li>
+                <li><a href="../admin/index.html" class="btn-admin">لوحة التحكم</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="service-hero" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+        <div class="container">
+            <div class="hero-content">
+                <i class="fas fa-mobile-alt"></i>
+                <h1>خدمة شحن رصيد الهاتف</h1>
+                <p>شحن فوري لجميع شبكات الاتصالات المغربية والعالمية</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">اختر شبكتك</h2>
+            
+            <!-- Maroc Telecom -->
+            <div class="platform-section">
+                <h3 class="platform-title" style="color: #00539f;">
+                    <i class="fas fa-signal"></i> Maroc Telecom
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header"><h3>20 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">20</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Maroc Telecom', 20)">اشحن الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header"><h3>50 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">50</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Maroc Telecom', 50)">اشحن الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header"><h3>100 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">100</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Maroc Telecom', 100)">اشحن الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orange -->
+            <div class="platform-section">
+                <h3 class="platform-title" style="color: #ff6600;">
+                    <i class="fas fa-signal"></i> Orange
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header"><h3>20 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">20</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Orange', 20)">اشحن الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card featured">
+                        <div class="featured-badge">عرض خاص</div>
+                        <div class="price-header"><h3>50 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">50</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Orange', 50)">اشحن الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header"><h3>100 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">100</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Orange', 100)">اشحن الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inwi -->
+            <div class="platform-section">
+                <h3 class="platform-title" style="color: #e30613;">
+                    <i class="fas fa-signal"></i> Inwi
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header"><h3>20 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">20</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Inwi', 20)">اشحن الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header"><h3>50 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">50</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Inwi', 50)">اشحن الآن</button>
+                        </div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header"><h3>100 درهم</h3></div>
+                        <div class="price-body">
+                            <div class="price-amount">
+                                <span class="currency">MAD</span>
+                                <span class="amount">100</span>
+                            </div>
+                            <button class="btn-price" onclick="selectRecharge('Inwi', 100)">اشحن الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="order-section" id="orderForm" style="display: none;">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2>شحن رصيد الهاتف</h2>
+                <form id="telecomForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الشبكة</label>
+                            <input type="text" id="network" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>المبلغ</label>
+                            <input type="text" id="amount" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>رقم الهاتف المراد شحنه</label>
+                        <input type="tel" id="phoneNumber" placeholder="06XXXXXXXX" maxlength="10" required>
+                        <small>أدخل الرقم بدون مسافات أو رموز</small>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>اسمك</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>هاتفك</label>
+                            <input type="tel" id="contactPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-bolt"></i>
+                            شحن فوري
+                        </button>
+                        <button type="button" class="btn-cancel" onclick="hideOrderForm()">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tech Services. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        let selectedNetwork = '';
+        let selectedAmount = 0;
+
+        function selectRecharge(network, amount) {
+            selectedNetwork = network;
+            selectedAmount = amount;
+            document.getElementById('network').value = network;
+            document.getElementById('amount').value = amount + ' MAD';
+            document.getElementById('orderForm').style.display = 'block';
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideOrderForm() {
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('telecomForm').reset();
+        }
+
+        document.getElementById('telecomForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                serviceType: 'telecom',
+                network: selectedNetwork,
+                amount: selectedAmount,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                name: document.getElementById('name').value,
+                contactPhone: document.getElementById('contactPhone').value,
+                email: document.getElementById('email').value,
+                price: selectedAmount
+            };
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('✅ تم الشحن بنجاح!');
+                    hideOrderForm();
+                } else {
+                    alert('❌ حدث خطأ. الرجاء المحاولة مرة أخرى.');
+                }
+            } catch (error) {
+                alert('❌ حدث خطأ في الاتصال.');
+            }
+        });
+    </script>
+
+    <style>
+        .platform-section {
+            margin: 50px 0;
+        }
+
+        .platform-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+    </style>
+
+    <script src="../js/enhancements.js"></script>
+</body>
+</html>
