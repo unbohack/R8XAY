@@ -21,10 +21,41 @@ const loadEnvIfAvailable = () => {
 
 loadEnvIfAvailable();
 
+const getEnvValue = (keys) => {
+    for (const key of keys) {
+        if (process.env[key]) {
+            return { key, value: process.env[key] };
+        }
+    }
+    return { key: null, value: null };
+};
+
 const getTelegramConfig = () => {
-    const token = process.env.TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID || process.env.TELEGRAM_CHANNEL_ID || process.env.TELEGRAM_GROUP_ID;
-    return { token, chatId };
+    const tokenLookup = getEnvValue([
+        'TELEGRAM_BOT_TOKEN',
+        'TELEGRAM_TOKEN',
+        'TELEGRAM_API_TOKEN',
+        'TG_BOT_TOKEN',
+        'BOT_TOKEN',
+        'TELEGRAM_BOT',
+        'BOT_API_TOKEN'
+    ]);
+    const chatIdLookup = getEnvValue([
+        'TELEGRAM_CHAT_ID',
+        'TELEGRAM_CHAT',
+        'TELEGRAM_CHANNEL_ID',
+        'TELEGRAM_GROUP_ID',
+        'TG_CHAT_ID',
+        'BOT_CHAT_ID',
+        'CHAT_ID'
+    ]);
+
+    return {
+        token: tokenLookup.value,
+        chatId: chatIdLookup.value,
+        tokenKey: tokenLookup.key,
+        chatIdKey: chatIdLookup.key
+    };
 };
 
 const escapeHtml = (value = '') => String(value)
@@ -39,13 +70,24 @@ const sendTelegramMessage = async (text) => {
         console.error('Telegram missing config', {
             tokenPresent: !!token,
             chatIdPresent: !!chatId,
+            tokenKey,
+            chatIdKey,
             envFileLoaded: loadedEnvFile,
             envVars: {
                 TELEGRAM_BOT_TOKEN: !!process.env.TELEGRAM_BOT_TOKEN,
                 TELEGRAM_TOKEN: !!process.env.TELEGRAM_TOKEN,
+                TELEGRAM_API_TOKEN: !!process.env.TELEGRAM_API_TOKEN,
+                TG_BOT_TOKEN: !!process.env.TG_BOT_TOKEN,
+                BOT_TOKEN: !!process.env.BOT_TOKEN,
+                TELEGRAM_BOT: !!process.env.TELEGRAM_BOT,
+                BOT_API_TOKEN: !!process.env.BOT_API_TOKEN,
                 TELEGRAM_CHAT_ID: !!process.env.TELEGRAM_CHAT_ID,
+                TELEGRAM_CHAT: !!process.env.TELEGRAM_CHAT,
                 TELEGRAM_CHANNEL_ID: !!process.env.TELEGRAM_CHANNEL_ID,
-                TELEGRAM_GROUP_ID: !!process.env.TELEGRAM_GROUP_ID
+                TELEGRAM_GROUP_ID: !!process.env.TELEGRAM_GROUP_ID,
+                TG_CHAT_ID: !!process.env.TG_CHAT_ID,
+                BOT_CHAT_ID: !!process.env.BOT_CHAT_ID,
+                CHAT_ID: !!process.env.CHAT_ID
             }
         });
 
