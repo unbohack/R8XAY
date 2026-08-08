@@ -53,8 +53,10 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             localStorage.setItem('admin_name', data.user.name);
 
             setMessage('تم تسجيل الدخول بنجاح، جاري التحويل...', 'success');
-            showDashboard();
-            initializeSocket();
+            setTimeout(() => {
+                showDashboard();
+                initializeSocket();
+            }, 300);
         } else {
             setMessage(data.message || 'حدث خطأ في تسجيل الدخول', 'error');
         }
@@ -81,9 +83,13 @@ async function verifyToken() {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
+        if (!response.ok) {
+            throw new Error('Auth verification failed');
+        }
+
         const data = await response.json();
 
-        if (data.success && data.data.role === 'admin') {
+        if (data.success && data.data && data.data.role === 'admin') {
             showDashboard();
             initializeSocket();
         } else {
@@ -91,7 +97,11 @@ async function verifyToken() {
         }
     } catch (error) {
         console.error('Token verification error:', error);
-        logout();
+        if (token) {
+            showLogin();
+        } else {
+            logout();
+        }
     }
 }
 
