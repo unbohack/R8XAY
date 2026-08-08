@@ -68,6 +68,10 @@
 }
 
 /* Hero Enhancements */
+body {
+    overflow-x: hidden;
+}
+
 .hero-badge {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -153,7 +157,7 @@
     gap: 15px;
     margin: 25px 0;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     animation: fadeInUp 1s ease-out 0.5s both;
 }
 
@@ -162,13 +166,15 @@
     color: var(--primary-color);
     padding: 12px 24px;
     border-radius: 12px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
 }
 
 .quick-action-btn:hover {
@@ -180,6 +186,17 @@
 
 .quick-action-btn i {
     font-size: 18px;
+}
+
+.featured-cta {
+    background: linear-gradient(135deg, #f59e0b, #fb923c);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.featured-cta:hover {
+    background: linear-gradient(135deg, #fb923c, #f59e0b);
+    color: #fff;
 }
 
 /* Trust Badges */
@@ -214,6 +231,60 @@
 .trust-badge i {
     color: #10b981;
     font-size: 18px;
+}
+
+/* Responsive layout for hero section */
+@media (max-width: 900px) {
+    .hero .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-content {
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-buttons,
+    .quick-actions,
+    .trust-badges {
+        justify-content: center;
+    }
+
+    .hero-image {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 70px 0;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05rem;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-stat {
+        padding: 15px;
+    }
+
+    .quick-action-btn {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .quick-actions {
+        flex-direction: column;
+    }
 }
 
 /* Floating Cards in Hero */
