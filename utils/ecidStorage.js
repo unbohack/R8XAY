@@ -31,7 +31,13 @@ const saveRecords = (records) => {
     return records;
 };
 
-const normalizeEcid = (value) => (value || '').toString().trim().toLowerCase();
+const normalizeEcid = (value) => {
+    if (value === null || value === undefined) return '';
+
+    const text = value.toString().trim().toLowerCase();
+    const withoutPrefix = text.startsWith('0x') ? text.slice(2) : text;
+    return withoutPrefix.replace(/\s+/g, '');
+};
 
 const findRecord = (records, ecid) => {
     const normalizedEcid = normalizeEcid(ecid);

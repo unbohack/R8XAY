@@ -23,7 +23,9 @@ const record = {
 storage.saveRecords([record]);
 const reloadedStorage = require('../utils/ecidStorage');
 const found = reloadedStorage.findRecord(reloadedStorage.loadRecords(), 'abc123');
+const prefixedMatch = reloadedStorage.findRecord(reloadedStorage.loadRecords(), '0xabc123');
 
 assert(found, 'Expected ECID record to be found after reloading storage');
 assert.strictEqual(found.ecid, 'ABC123');
+assert(prefixedMatch, 'Expected ECID lookup to match the same value even when prefixed with 0x');
 console.log('ECID persistence test passed');
