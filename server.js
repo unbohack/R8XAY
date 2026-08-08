@@ -1,5 +1,7 @@
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+const envPath = path.resolve(__dirname, '.env');
+require('dotenv').config({ path: envPath });
+console.log('ENV load:', envPath, 'TELEGRAM_BOT_TOKEN=', !!process.env.TELEGRAM_BOT_TOKEN, 'TELEGRAM_CHAT_ID=', !!process.env.TELEGRAM_CHAT_ID);
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');

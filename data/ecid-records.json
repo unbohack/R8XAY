@@ -7,5 +7,18 @@
     "phone": "0000000000",
     "notes": "",
     "createdAt": "2026-08-08T01:03:07.080Z"
+  },
+  {
+    "id": "ECID-1786163336251",
+    "ecid": "TEST-ECID-FIX-123",
+    "deviceModel": "غير محدد",
+    "customerName": "غير محدد",
+    "phone": "غير محدد",
+    "notes": "",
+    "deviceInfo": {
+      "browser": "Test",
+      "os": "Local"
+    },
+    "createdAt": "2026-08-08T04:28:56.252Z"
   }
 ]

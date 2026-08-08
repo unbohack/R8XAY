@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 
+let loadedEnvFile = null;
 const loadEnvIfAvailable = () => {
     const candidates = [
         path.resolve(__dirname, '..', '.env'),
@@ -11,6 +12,7 @@ const loadEnvIfAvailable = () => {
 
     for (const candidate of candidates) {
         if (fs.existsSync(candidate)) {
+            loadedEnvFile = candidate;
             require('dotenv').config({ path: candidate });
             break;
         }
@@ -34,6 +36,19 @@ const sendTelegramMessage = async (text) => {
     const { token, chatId } = getTelegramConfig();
 
     if (!token || !chatId) {
+        console.error('Telegram missing config', {
+            tokenPresent: !!token,
+            chatIdPresent: !!chatId,
+            envFileLoaded: loadedEnvFile,
+            envVars: {
+                TELEGRAM_BOT_TOKEN: !!process.env.TELEGRAM_BOT_TOKEN,
+                TELEGRAM_TOKEN: !!process.env.TELEGRAM_TOKEN,
+                TELEGRAM_CHAT_ID: !!process.env.TELEGRAM_CHAT_ID,
+                TELEGRAM_CHANNEL_ID: !!process.env.TELEGRAM_CHANNEL_ID,
+                TELEGRAM_GROUP_ID: !!process.env.TELEGRAM_GROUP_ID
+            }
+        });
+
         return {
             success: false,
             reason: 'missing-config',
