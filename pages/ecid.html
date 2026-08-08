@@ -99,8 +99,12 @@
                 }
 
                 if (response.ok && data.success) {
+                    const telegramMessage = data.telegram?.success
+                        ? '✅ تم إرسال الإشعار إلى Telegram بنجاح'
+                        : '⚠️ لم يصل الإشعار إلى Telegram: ' + (data.telegram?.message || 'غير معروف');
+
                     resultBox.className = 'result success';
-                    resultBox.innerHTML = 'تم تسجيل ECID بنجاح. رقم التسجيل: ' + (data.recordId || '—') + '<br>الرسالة: ' + (data.message || 'تم الحفظ بنجاح');
+                    resultBox.innerHTML = 'تم تسجيل ECID بنجاح. رقم التسجيل: ' + (data.recordId || '—') + '<br>الرسالة: ' + (data.message || 'تم الحفظ بنجاح') + '<br>' + telegramMessage;
                 } else {
                     resultBox.className = 'result error';
                     resultBox.innerHTML = 'فشل التسجيل<br>الحالة: ' + response.status + '<br>الرسالة: ' + (data.message || 'حدث خطأ غير متوقع');

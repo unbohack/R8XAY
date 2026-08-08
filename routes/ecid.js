@@ -5,7 +5,7 @@ const { sendEcidTelegramNotification } = require('../services/telegram');
 
 let ecidRecords = loadRecords();
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const { ecid, deviceModel, customerName, phone, notes, deviceInfo } = req.body;
 
@@ -24,6 +24,10 @@ router.post('/register', (req, res) => {
                 alreadyRegistered: true,
                 message: 'ECID already registered',
                 data: existingRecord,
+                telegram: {
+                    success: false,
+                    message: 'لم يتم التحقق من الإشعار مرة أخرى'
+                },
                 debug: {
                     received: ecid,
                     normalized: normalizeEcid(ecid)
@@ -45,14 +49,35 @@ router.post('/register', (req, res) => {
         ecidRecords = [...ecidRecords, record];
         saveRecords(ecidRecords);
 
-        sendEcidTelegramNotification(record).catch(() => {});
+        let telegramStatus = {
+            success: false,
+            message: 'لم يتم إرسال الإشعار إلى Telegram'
+        };
+
+        try {
+            const telegramResult = await sendEcidTelegramNotification(record);
+            telegramStatus = {
+                success: telegramResult?.success === true,
+                message: telegramResult?.success === true
+                    ? 'تم إرسال الإشعار إلى Telegram بنجاح'
+                    : (telegramResult?.message || 'فشل إرسال الإشعار إلى Telegram')
+            };
+        } catch (notificationError) {
+            telegramStatus = {
+                success: false,
+                message: 'فشل إرسال الإشعار إلى Telegram'
+            };
+        }
 
         res.json({
             success: true,
             alreadyRegistered: false,
-            message: 'تم تسجيل ECID بنجاح',
+            message: telegramStatus.success
+                ? 'تم تسجيل ECID بنجاح وإرسال الإشعار إلى Telegram'
+                : 'تم تسجيل ECID بنجاح ولكن لم يصل الإشعار إلى Telegram',
             recordId: record.id,
-            data: record
+            data: record,
+            telegram: telegramStatus
         });
     } catch (error) {
         console.error('ECID registration error:', error);
