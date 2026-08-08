@@ -22,7 +22,11 @@ router.post('/register', (req, res) => {
                 success: true,
                 alreadyRegistered: true,
                 message: 'ECID already registered',
-                data: existingRecord
+                data: existingRecord,
+                debug: {
+                    received: ecid,
+                    normalized: normalizeEcid(ecid)
+                }
             });
         }
 
@@ -63,7 +67,11 @@ router.get('/check/:ecid', (req, res) => {
         success: true,
         exists: !!existingRecord,
         message: existingRecord ? 'ECID already registered' : 'ECID not registered',
-        data: existingRecord || null
+        data: existingRecord || null,
+        debug: {
+            received: req.params.ecid,
+            normalized: normalizeEcid(req.params.ecid)
+        }
     });
 });
 
