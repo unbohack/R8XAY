@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { loadRecords, saveRecords, findRecord, normalizeEcid } = require('../utils/ecidStorage');
 
-// Simple in-memory storage for ECID registrations
-const ecidRecords = [];
-
-const normalizeEcid = (value) => (value || '').toString().trim().toLowerCase();
+let ecidRecords = loadRecords();
 
 router.post('/register', (req, res) => {
     try {
@@ -17,8 +15,7 @@ router.post('/register', (req, res) => {
             });
         }
 
-        const normalizedEcid = normalizeEcid(ecid);
-        const existingRecord = ecidRecords.find(record => normalizeEcid(record.ecid) === normalizedEcid);
+        const existingRecord = findRecord(ecidRecords, ecid);
 
         if (existingRecord) {
             return res.status(200).json({
@@ -39,7 +36,8 @@ router.post('/register', (req, res) => {
             createdAt: new Date().toISOString()
         };
 
-        ecidRecords.push(record);
+        ecidRecords = [...ecidRecords, record];
+        saveRecords(ecidRecords);
 
         res.json({
             success: true,
@@ -58,8 +56,8 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/check/:ecid', (req, res) => {
-    const normalizedEcid = normalizeEcid(req.params.ecid);
-    const existingRecord = ecidRecords.find(record => normalizeEcid(record.ecid) === normalizedEcid);
+    ecidRecords = loadRecords();
+    const existingRecord = findRecord(ecidRecords, req.params.ecid);
 
     res.json({
         success: true,
@@ -70,6 +68,7 @@ router.get('/check/:ecid', (req, res) => {
 });
 
 router.get('/records', (req, res) => {
+    ecidRecords = loadRecords();
     res.json({
         success: true,
         count: ecidRecords.length,
