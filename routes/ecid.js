@@ -4,6 +4,8 @@ const router = express.Router();
 // Simple in-memory storage for ECID registrations
 const ecidRecords = [];
 
+const normalizeEcid = (value) => (value || '').toString().trim().toLowerCase();
+
 router.post('/register', (req, res) => {
     try {
         const { ecid, deviceModel, customerName, phone, notes } = req.body;
@@ -12,6 +14,18 @@ router.post('/register', (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: 'الرجاء إدخال ECID'
+            });
+        }
+
+        const normalizedEcid = normalizeEcid(ecid);
+        const existingRecord = ecidRecords.find(record => normalizeEcid(record.ecid) === normalizedEcid);
+
+        if (existingRecord) {
+            return res.status(200).json({
+                success: true,
+                alreadyRegistered: true,
+                message: 'ECID already registered',
+                data: existingRecord
             });
         }
 
@@ -29,6 +43,7 @@ router.post('/register', (req, res) => {
 
         res.json({
             success: true,
+            alreadyRegistered: false,
             message: 'تم تسجيل ECID بنجاح',
             recordId: record.id,
             data: record
@@ -40,6 +55,18 @@ router.post('/register', (req, res) => {
             message: 'حدث خطأ أثناء حفظ ECID'
         });
     }
+});
+
+router.get('/check/:ecid', (req, res) => {
+    const normalizedEcid = normalizeEcid(req.params.ecid);
+    const existingRecord = ecidRecords.find(record => normalizeEcid(record.ecid) === normalizedEcid);
+
+    res.json({
+        success: true,
+        exists: !!existingRecord,
+        message: existingRecord ? 'ECID already registered' : 'ECID not registered',
+        data: existingRecord || null
+    });
 });
 
 router.get('/records', (req, res) => {

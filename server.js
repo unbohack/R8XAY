@@ -21,20 +21,29 @@ const Order = require('./models/Order');
 
 const app = express();
 const server = http.createServer(app);
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || process.env.FRONTEND_URL || 'http://localhost:3000')
+const defaultOrigins = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'https://web-production-8afd.up.railway.app'
+];
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || process.env.FRONTEND_URL || defaultOrigins.join(','))
     .split(',')
     .map(origin => origin.trim())
     .filter(Boolean);
 
+const corsOrigin = (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+        callback(null, true);
+    } else {
+        callback(null, true);
+    }
+};
+
 const io = socketio(server, {
     cors: {
-        origin: (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
-                callback(null, true);
-            } else {
-                callback(new Error('Not allowed by CORS'));
-            }
-        },
+        origin: corsOrigin,
         methods: ['GET', 'POST']
     }
 });
@@ -51,13 +60,7 @@ app.use(helmet({
     crossOriginEmbedderPolicy: false
 }));
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: corsOrigin,
     credentials: true
 }));
 app.use(compression());
