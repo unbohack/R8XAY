@@ -1,6 +1,23 @@
+const fs = require('fs');
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 const axios = require('axios');
+
+const loadEnvIfAvailable = () => {
+    const candidates = [
+        path.resolve(__dirname, '..', '.env'),
+        path.resolve(__dirname, '..', '..', '.env'),
+        path.resolve(process.cwd(), '.env')
+    ];
+
+    for (const candidate of candidates) {
+        if (fs.existsSync(candidate)) {
+            require('dotenv').config({ path: candidate });
+            break;
+        }
+    }
+};
+
+loadEnvIfAvailable();
 
 const getTelegramConfig = () => {
     const token = process.env.TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_TOKEN;
