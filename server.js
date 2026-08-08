@@ -259,7 +259,7 @@ app.use((req, res) => {
             message: 'API endpoint not found' 
         });
     } else {
-        res.status(404).sendFile(path.join(__dirname, '404.html'));
+        res.status(404).type('html').send(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>غير موجود</title></head><body style="font-family:Arial,sans-serif;padding:24px;">لا توجد هذه الصفحة.</body></html>`);
     }
 });
 
