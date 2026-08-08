@@ -44,9 +44,15 @@ const findRecord = (records, ecid) => {
     return records.find(record => normalizeEcid(record.ecid) === normalizedEcid) || null;
 };
 
+const removeRecord = (records, recordId) => {
+    const filtered = records.filter(record => (record.id || record.ecid) !== recordId);
+    return filtered;
+};
+
 module.exports = {
     loadRecords,
     saveRecords,
     findRecord,
+    removeRecord,
     normalizeEcid
 };

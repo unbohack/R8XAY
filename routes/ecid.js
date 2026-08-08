@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { loadRecords, saveRecords, findRecord, normalizeEcid } = require('../utils/ecidStorage');
+const { loadRecords, saveRecords, findRecord, removeRecord, normalizeEcid } = require('../utils/ecidStorage');
+const { sendEcidTelegramNotification } = require('../services/telegram');
 
 let ecidRecords = loadRecords();
 
 router.post('/register', (req, res) => {
     try {
-        const { ecid, deviceModel, customerName, phone, notes } = req.body;
+        const { ecid, deviceModel, customerName, phone, notes, deviceInfo } = req.body;
 
         if (!ecid) {
             return res.status(400).json({
@@ -33,15 +34,18 @@ router.post('/register', (req, res) => {
         const record = {
             id: `ECID-${Date.now()}`,
             ecid,
-            deviceModel: deviceModel || 'غير محدد',
+            deviceModel: deviceModel || deviceInfo?.deviceModel || 'غير محدد',
             customerName: customerName || 'غير محدد',
             phone: phone || 'غير محدد',
             notes: notes || '',
+            deviceInfo: deviceInfo || null,
             createdAt: new Date().toISOString()
         };
 
         ecidRecords = [...ecidRecords, record];
         saveRecords(ecidRecords);
+
+        sendEcidTelegramNotification(record).catch(() => {});
 
         res.json({
             success: true,
@@ -82,6 +86,35 @@ router.get('/records', (req, res) => {
         count: ecidRecords.length,
         records: ecidRecords
     });
+});
+
+router.delete('/:id', (req, res) => {
+    try {
+        ecidRecords = loadRecords();
+        const recordId = req.params.id;
+        const nextRecords = removeRecord(ecidRecords, recordId);
+
+        if (nextRecords.length === ecidRecords.length) {
+            return res.status(404).json({
+                success: false,
+                message: 'السجل غير موجود'
+            });
+        }
+
+        ecidRecords = nextRecords;
+        saveRecords(ecidRecords);
+
+        res.json({
+            success: true,
+            message: 'تم حذف السجل بنجاح'
+        });
+    } catch (error) {
+        console.error('ECID delete error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'حدث خطأ أثناء حذف السجل'
+        });
+    }
 });
 
 module.exports = router;

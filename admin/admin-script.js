@@ -2,6 +2,7 @@
 let token = localStorage.getItem('admin_token');
 let socket;
 let currentChatSession = null;
+let ecidRecordsData = [];
 
 // Check if user is logged in
 window.addEventListener('DOMContentLoaded', () => {
@@ -21,9 +22,16 @@ function showLogin() {
 // Login form handler
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    const email = document.getElementById('loginEmail').value;
+
+    const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value;
+    const button = document.getElementById('loginButton');
+    const messageBox = document.getElementById('loginMessage');
+
+    setMessage('', '');
+    button.classList.add('is-loading');
+    button.disabled = true;
+    button.querySelector('span').textContent = 'جاري تسجيل الدخول...';
 
     try {
         const response = await fetch('/api/auth/login', {
@@ -36,24 +44,35 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
         if (data.success) {
             if (data.user.role !== 'admin') {
-                alert('غير مصرح لك بالوصول إلى لوحة التحكم');
+                setMessage('غير مصرح لك بالوصول إلى لوحة التحكم', 'error');
                 return;
             }
 
             token = data.token;
             localStorage.setItem('admin_token', token);
             localStorage.setItem('admin_name', data.user.name);
-            
+
+            setMessage('تم تسجيل الدخول بنجاح، جاري التحويل...', 'success');
             showDashboard();
             initializeSocket();
         } else {
-            alert(data.message);
+            setMessage(data.message || 'حدث خطأ في تسجيل الدخول', 'error');
         }
     } catch (error) {
         console.error('Login error:', error);
-        alert('حدث خطأ في تسجيل الدخول');
+        setMessage('حدث خطأ في تسجيل الدخول. يرجى المحاولة لاحقًا.', 'error');
+    } finally {
+        button.classList.remove('is-loading');
+        button.disabled = false;
+        button.querySelector('span').textContent = 'تسجيل الدخول';
     }
 });
+
+function setMessage(text, type) {
+    const messageBox = document.getElementById('loginMessage');
+    messageBox.textContent = text;
+    messageBox.className = `login-message ${type}`.trim();
+}
 
 // Verify token
 async function verifyToken() {
@@ -203,6 +222,7 @@ function showPage(page) {
         contacts: 'رسائل الاتصال',
         chat: 'الدردشة المباشرة',
         users: 'إدارة المستخدمين',
+        ecid: 'إدارة سجلات ECID',
         settings: 'الإعدادات'
     };
 
@@ -214,6 +234,7 @@ function showPage(page) {
     else if (page === 'contacts') loadContacts();
     else if (page === 'chat') loadChatSessions();
     else if (page === 'users') loadUsers();
+    else if (page === 'ecid') loadEcidRecords();
 }
 
 // Load dashboard data
@@ -402,6 +423,129 @@ async function loadChatSessions() {
 // Load users
 function loadUsers() {
     document.getElementById('usersTable').innerHTML = '<p>قريباً...</p>';
+}
+
+// Load ECID records
+async function loadEcidRecords() {
+    try {
+        const response = await fetch('/api/ecid/records', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            ecidRecordsData = data.records || [];
+            renderEcidRecords(ecidRecordsData);
+            updateEcidStats(ecidRecordsData);
+        } else {
+            document.getElementById('ecidTable').innerHTML = '<p class="ecid-empty">تعذر تحميل سجلات ECID</p>';
+        }
+    } catch (error) {
+        console.error('ECID load error:', error);
+        document.getElementById('ecidTable').innerHTML = '<p class="ecid-empty">حدث خطأ أثناء تحميل سجلات ECID</p>';
+    }
+}
+
+function renderEcidRecords(records) {
+    const table = document.getElementById('ecidTable');
+
+    if (!records.length) {
+        table.innerHTML = '<p class="ecid-empty">لا توجد سجلات ECID</p>';
+        return;
+    }
+
+    const uniqueDevices = new Set(records.map(item => item.deviceModel || 'غير محدد').filter(Boolean));
+    const deviceOptions = ['<option value="">كل الأجهزة</option>'];
+    uniqueDevices.forEach(device => deviceOptions.push(`<option value="${device}">${device}</option>`));
+    document.getElementById('ecidDeviceFilter').innerHTML = deviceOptions.join('');
+
+    table.innerHTML = `
+        <table>
+            <thead>
+                <tr>
+                    <th>ECID</th>
+                    <th>الموديل</th>
+                    <th>الاسم</th>
+                    <th>الهاتف</th>
+                    <th>الملاحظات</th>
+                    <th>التاريخ</th>
+                    <th>إجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${records.map(record => `
+                    <tr>
+                        <td>${record.ecid}</td>
+                        <td>${record.deviceModel || 'غير محدد'}</td>
+                        <td>${record.customerName || 'غير محدد'}</td>
+                        <td>${record.phone || 'غير محدد'}</td>
+                        <td>${record.notes || '—'}</td>
+                        <td>${new Date(record.createdAt).toLocaleDateString('ar-EG')}</td>
+                        <td>
+                            <div class="ecid-actions">
+                                <button class="btn-copy" onclick="copyEcid('${record.ecid}')" title="نسخ ECID"><i class="fas fa-copy"></i></button>
+                                <button class="btn-delete" onclick="deleteEcidRecord('${record.id || record.ecid}')" title="حذف"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+
+    updateEcidStats(records);
+}
+
+function updateEcidStats(records) {
+    document.getElementById('ecidTotalCount').textContent = ecidRecordsData.length;
+    document.getElementById('ecidUniqueDevices').textContent = new Set(ecidRecordsData.map(item => item.deviceModel || 'غير محدد')).size;
+    document.getElementById('ecidFilteredCount').textContent = records.length;
+}
+
+function filterEcidRecords() {
+    const query = document.getElementById('ecidSearchInput').value.toLowerCase().trim();
+    const device = document.getElementById('ecidDeviceFilter').value;
+
+    const filtered = ecidRecordsData.filter(record => {
+        const haystack = `${record.ecid || ''} ${record.customerName || ''} ${record.deviceModel || ''} ${record.phone || ''}`.toLowerCase();
+        const matchesQuery = !query || haystack.includes(query);
+        const matchesDevice = !device || (record.deviceModel || 'غير محدد') === device;
+        return matchesQuery && matchesDevice;
+    });
+
+    renderEcidRecords(filtered);
+}
+
+function copyEcid(ecid) {
+    navigator.clipboard.writeText(ecid).then(() => {
+        showNotification('تم نسخ ECID بنجاح', 'success');
+    }).catch(() => {
+        showNotification('تعذر نسخ ECID', 'warning');
+    });
+}
+
+async function deleteEcidRecord(recordId) {
+    if (!confirm('هل تريد حذف هذا السجل؟')) return;
+
+    try {
+        const response = await fetch(`/api/ecid/${recordId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            showNotification('تم حذف السجل بنجاح', 'success');
+            loadEcidRecords();
+        } else {
+            showNotification(data.message || 'تعذر حذف السجل', 'error');
+        }
+    } catch (error) {
+        console.error('Delete ECID error:', error);
+        showNotification('حدث خطأ أثناء حذف السجل', 'error');
+    }
 }
 
 // Helper functions

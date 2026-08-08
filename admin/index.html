@@ -19,14 +19,15 @@
             <form id="loginForm">
                 <div class="form-group">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" required>
+                    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" required autocomplete="email">
                 </div>
                 <div class="form-group">
                     <i class="fas fa-lock"></i>
-                    <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                    <input type="password" id="loginPassword" placeholder="كلمة المرور" required autocomplete="current-password">
                 </div>
-                <button type="submit" class="btn-login">
-                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                <div id="loginMessage" class="login-message" aria-live="polite"></div>
+                <button type="submit" class="btn-login" id="loginButton">
+                    <i class="fas fa-sign-in-alt"></i> <span>تسجيل الدخول</span>
                 </button>
             </form>
         </div>
@@ -67,6 +68,10 @@
                 <a href="#users" class="nav-link" data-page="users">
                     <i class="fas fa-users"></i>
                     <span>المستخدمين</span>
+                </a>
+                <a href="#ecid" class="nav-link" data-page="ecid">
+                    <i class="fas fa-fingerprint"></i>
+                    <span>ECID</span>
                 </a>
                 <a href="#settings" class="nav-link" data-page="settings">
                     <i class="fas fa-cog"></i>
@@ -230,6 +235,55 @@
                         </button>
                     </div>
                     <div id="usersTable" class="table-responsive"></div>
+                </div>
+
+                <!-- ECID Page -->
+                <div id="ecidPage" class="page">
+                    <div class="page-header">
+                        <h2>إدارة سجلات ECID</h2>
+                        <button onclick="loadEcidRecords()" class="btn-primary">
+                            <i class="fas fa-sync-alt"></i> تحديث
+                        </button>
+                    </div>
+
+                    <div class="stats-grid ecid-stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="ecidTotalCount">0</h3>
+                                <p>إجمالي السجلات</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #10b981, #34d399);">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="ecidUniqueDevices">0</h3>
+                                <p>أجهزة مختلفة</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="ecidFilteredCount">0</h3>
+                                <p>النتائج المعروضة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filters ecid-filters">
+                        <input type="text" id="ecidSearchInput" placeholder="ابحث بالاسم أو ECID أو الموديل..." oninput="filterEcidRecords()">
+                        <select id="ecidDeviceFilter" onchange="filterEcidRecords()">
+                            <option value="">كل الأجهزة</option>
+                        </select>
+                    </div>
+
+                    <div id="ecidTable" class="table-responsive"></div>
                 </div>
 
                 <!-- Settings Page -->

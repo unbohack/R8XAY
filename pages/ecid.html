@@ -34,11 +34,49 @@
     </div>
 
     <script>
+        function getDeviceInfo() {
+            const nav = navigator;
+            const screen = window.screen || {};
+            const ua = nav.userAgent || '';
+            const userAgentData = nav.userAgentData || {};
+            const brands = Array.isArray(userAgentData.brands) ? userAgentData.brands.map(b => b.brand).join(', ') : '';
+
+            let deviceModel = 'غير محدد';
+            if (userAgentData.mobile !== undefined) {
+                deviceModel = userAgentData.mobile ? 'جهاز محمول' : 'جهاز سطح المكتب';
+            } else if (/iPhone/i.test(ua)) {
+                deviceModel = 'iPhone';
+            } else if (/iPad/i.test(ua)) {
+                deviceModel = 'iPad';
+            } else if (/Android/i.test(ua)) {
+                deviceModel = 'Android';
+            }
+
+            return {
+                deviceModel,
+                browser: brands || (ua.includes('Chrome') ? 'Chrome' : ua.includes('Firefox') ? 'Firefox' : 'Other'),
+                os: userAgentData.platform || nav.platform || 'Unknown',
+                userAgent: ua,
+                platform: nav.platform || 'Unknown',
+                language: nav.language || 'Unknown',
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown',
+                screen: `${screen.width || 0}x${screen.height || 0}`,
+                colorDepth: screen.colorDepth || 0,
+                cookieEnabled: nav.cookieEnabled,
+                online: nav.onLine,
+                hardwareConcurrency: nav.hardwareConcurrency || 0,
+                deviceMemory: nav.deviceMemory || 0,
+                maxTouchPoints: nav.maxTouchPoints || 0,
+                isMobile: /Mobi|Android|iPhone|iPad/i.test(ua)
+            };
+        }
+
         document.getElementById('ecidForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const resultBox = document.getElementById('result');
             const payload = {
-                ecid: document.getElementById('ecid').value.trim()
+                ecid: document.getElementById('ecid').value.trim(),
+                deviceInfo: getDeviceInfo()
             };
 
             resultBox.style.display = 'block';

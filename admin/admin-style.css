@@ -161,6 +161,22 @@ body {
     color: var(--text-light);
 }
 
+.login-message {
+    min-height: 24px;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.login-message.error {
+    color: var(--danger-color);
+}
+
+.login-message.success {
+    color: var(--success-color);
+}
+
 #loginForm input {
     width: 100%;
     padding: 15px 45px 15px 15px;
@@ -190,6 +206,20 @@ body {
 
 .btn-login:hover {
     transform: translateY(-2px);
+}
+
+.btn-login.is-loading {
+    opacity: 0.8;
+    cursor: wait;
+}
+
+.btn-login.is-loading i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* Admin Dashboard */
@@ -463,6 +493,61 @@ body {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ecid-stats-grid {
+    margin-bottom: 1.5rem;
+}
+
+.ecid-filters {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ecid-filters input,
+.ecid-filters select {
+    padding: 10px 14px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    min-width: 220px;
+    font-size: 0.95rem;
+}
+
+.ecid-filters input:focus,
+.ecid-filters select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.ecid-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.ecid-actions button {
+    padding: 7px 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.ecid-actions .btn-copy {
+    background: var(--primary-color);
+}
+
+.ecid-actions .btn-delete {
+    background: var(--danger-color);
+}
+
+.ecid-empty {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-light);
 }
 
 table {
